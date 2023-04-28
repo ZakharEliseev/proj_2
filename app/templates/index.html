@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block title %}
+    Главное меню
+{% endblock %}
+
+
+{% block body %}
+<main class="content">
+      <div class="content__meta">
+        <div class="weather">
+          <div id="id292b0ba1f27c1"  a='{"t":"r","v":"1.2","lang":"ru","locs":[93],"ssot":"c","sics":"ms","cbkg":"#FFFFFF00","cfnt":"#000000","codd":"#FFFFFF00","cont":"#000000d4"}'>
+            Источник данных о погоде:
+            <a href="https://meteolabs.ru/погода_белоярский/">прогноз погоды Белоярский</a>
+          </div>
+        </div>
+            <div id="eventCalendar" >
+            <script src={{ url_for('static', filename='js/jquery.min.js') }}></script>
+            <script src="{{ url_for('static', filename='js/moment.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.eventCalendar.js') }}"></script>
+            <script>
+            $(function(){
+              var data = [
+                { "date": "2022-10-13 10:15:20", "title": "День рождения", "description": "МФЦ"  },
+                { "date": "2022-10-15 10:15:20", "title": "День рождения", "description": "МФЦ"  },
+              ];
+              $('#eventCalendar').eventCalendar({
+                jsonData: data,
+                eventsjson: 'data.json',
+                jsonDateFormat: 'human',
+                startWeekOnMonday: false,
+                openEventInNewWindow: true,
+                dateFormat: 'DD-MM-YYYY',
+                showDescription: false,
+                locales: {
+                  locale: "ru",
+                  txt_noEvents: "Нажмите на дату или месяц для просмотра событий",
+                  txt_SpecificEvents_prev: "",
+                  txt_SpecificEvents_after: "события:",
+                  txt_NextEvents: "Следующие события:",
+                  txt_GoToEventUrl: "Смотреть",
+                  moment: {
+                    "months" : [ "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+                    "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь" ],
+                    "monthsShort" : [ "Янв", "Фев", "Мар", "Апр", "Май", "Июн",
+                    "Июл", "Авг", "Сен", "Окт", "Ноя", "Дек" ],
+                    "weekdays" : [ "Воскресенье", "Понедельник","Вторник","Среда","Четверг",
+                    "Пятница","Суббота" ],
+                    "weekdaysShort" : [ "Вс","Пн","Вт","Ср","Чт",
+                    "Пт","Сб" ],
+                    "weekdaysMin" : [ "Вс","Пн","Вт","Ср","Чт",
+                    "Пт","Сб" ]
+                  }
+                }
+              });
+            });
+            </script>
+            </div>
+      </div>
+
+    <div class='menu_nav'>
+      <div class='title_content_links'>
+        Меню основного офиса
+      </div>
+      <div class="content__links">
+          <a class="content__link" href="/" >
+            <img src="{{ url_for('static', filename='media_files/png/nav/nav-01.png')}}" alt="Home" title="МФЦ" />
+              <p class="name_content_link">Главная страница</p>
+          </a>
+          <a class="content__link" href="{{ url_for('admins') }}" >
+            <img src="{{ url_for('static', filename='media_files/png/nav/nav-08-2')}}.png" alt="adm" title="Администраторы" />
+            <p class="name_content_link">Администраторы</p>
+          </a>
+          <a class="content__link" href="{{ url_for('experts') }}" >
+            <img src="{{ url_for('static', filename='media_files/png/nav/nav-03.png')}}" alt="Exp" title="Эксперты" />
+            <p class="name_content_link">Эксперты</p>
+          </a>
+          <a class="content__link" href="{{ url_for('baks') }}" >
+            <img src="{{ url_for('static', filename='media_files/png/nav/nav-03-3')}}.png" alt="bak" title="Бэк офис" />
+            <p class="name_content_link">Бэк офис</p>
+          </a>
+          <a class="content__link" href="{{ url_for('its') }}" >
+            <img src="{{ url_for('static', filename='media_files/png/nav/nav-05.png')}}" alt="it" title="Инженеры" />
+            <p class="name_content_link">Инженеры</p>
+          </a>
+          <a class="content__link" href="#" >
+            <img width='97' height='97 ' src="{{ url_for('static', filename='media_files/png/nav/call-centr.png')}}" alt="call" title="Колл-центр" />
+            <p class="name_content_link">Колл-центр</p>
+          </a>
+
+      </div>
+      <div class='title_content_links'>
+        <p class="name_content_links">Меню ТОСП</p>
+      </div>
+      <div class="content__links">
+        <a class="content__link" href="" target="_blank">
+          <img src="{{ url_for('static', filename='media_files/png/nav/nav-03-2.png' )}}" alt="Лыхма" title="Лыхма" />
+          <p class="name_content_link">Лыхма</p>
+        </a>
+        <a class="content__link" href="" target="_blank">
+          <img src="{{ url_for('static', filename='media_files/png/nav/nav-03-2.png' )}}" alt="Казым" title="Казым" />
+          <p class="name_content_link">Казым</p>
+        </a>
+        <a class="content__link" href="" target="_blank">
+          <img src="{{ url_for('static', filename='media_files/png/nav/nav-03-2.png' )}}" alt="Верхнеказымский" title="Верхнеказымский" />
+          <p class="name_content_link">Верхнеказымский</p>
+        </a>
+        <a class="content__link" href="" target="_blank">
+          <img src="{{ url_for('static', filename='media_files/png/nav/nav-03-2.png' )}}" alt="Сосновка" title="Сосновка" />
+          <p class="name_content_link">Сосновка</p>
+        </a>
+        <a class="content__link" href="" target="_blank">
+          <img src="{{ url_for('static', filename='media_files/png/nav/nav-03-2.png' )}}" alt="Сорум" title="Сорум" />
+          <p class="name_content_link">Сорум</p>
+        </a>
+        <a class="content__link" href="" target="_blank">
+          <img width='96' height='96' src="{{ url_for('static', filename='/media_files/png/nav/man.png') }}" alt="Полноват" title="Полноват" />
+          <p class="name_content_link">Полноват</p>
+        </a>
+
+      </div>
+    </div>
+    </main>
+
+{% endblock %}
+{% block content %}
+
+{% endblock %}

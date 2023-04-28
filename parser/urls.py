@@ -1,0 +1,10 @@
+url1 = 'http://10.107.10.110/startwlm/Hme_Toner.htm'
+url2 = 'http://10.107.10.111/startwlm/Hme_Toner.htm'
+url3 = "http://10.107.10.112/index.html"
+url4 = "http://10.107.10.113/index.html"
+url5 = "http://10.107.10.114/index.html"
+url6 = "http://10.107.10.115/index.html"
+url7 = "http://10.107.10.101/index.html"
+url8 = "http://10.107.10.104/index.html"
+url9 = "http://10.107.10.102/startwlm/Hme_Toner.htm"
+url10 = "http://10.107.10.120/startwlm/Hme_Toner.htm"

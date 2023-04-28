@@ -1,0 +1,70 @@
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'BreeCYR-Light';
+}
+body {
+    background: rgba(206, 154, 104, 0.671);
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    align-items: center;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: 96px;
+    grid-template-rows: repeat(6, 106px);
+    border-radius: 6px;
+    position: fixed;
+    left: 10px;
+
+}
+.services {
+    background-color: #fff9e6;
+    /* background-image: url(../static/jpg/texture-02.jpg); */
+    display: grid;
+    grid-template-columns: repeat(4, 156px);
+    grid-auto-rows: 140px;
+    border: 3px solid rgb(108, 55, 10);
+    border-radius: 12px;
+    position: sticky;
+    left: 20em;
+}
+.cell {
+    box-shadow: inset 1px 1px 1px rgb(108, 55, 10);
+    text-align: center;
+}
+.logo{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+  }
+  .content__link{
+    text-align: center;
+    font-size: 13px;
+    text-decoration: none;
+    color:#492607;
+    box-shadow: inset 1px 1px 1px rgb(108, 55, 10);
+    text-align: center;
+  }
+#img_links{
+    padding-top: 7px;
+    width: 86px;
+    height: 86px;
+}
+/*.vidacha{*/
+/*    padding-top: 7px;*/
+/*    width:121px;*/
+/*    height:89px;*/
+/*}*/
+
+#current_page{
+    text-decoration: none;
+    color: rgb(61, 34, 5);
+    text-align: center;
+    font-family: Loma;
+    font-size: 20px
+}
+

@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+    {% block title %}
+        Эксперты
+    {% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_pages.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/media.css') }}">
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" > <!-- хз -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+{% endblock %}
+
+{% block body %}
+    <section class="menu">
+            <a class="img_menu" id="current_page"  href="{{ url_for('admins') }}" >
+               Меню Экспертов
+           </a>
+            <a class="img_menu" href="{{ url_for('index') }}" >
+                <img  src="{{ url_for('static', filename='media_files/png/nav/nav-01.png')}}" alt="Главная" title="МФЦ" />
+           </a>
+
+
+            <a href="{{ url_for('admins') }}">
+                <img src="{{ url_for('static', filename='media_files/png/nav/nav-08-2.png')}}" alt="adm" title="Администраторы" />
+            </a>
+
+
+            <a href="{{ url_for('baks') }}">
+                <img class="img_menu" src="../../static/media_files/png/nav/nav-03-3.png" alt="bak" title="Бэк офис" />
+          </a>
+
+
+            <a href="{{url_for('its')}}" target="">
+                <img class="img_menu" src="../../static/media_files/png/nav/nav-05.png" alt="it" title="Инженеры" />
+            </a>
+
+
+            <a  href="" target="">
+                <img class="img_menu" width='97' height='97 ' src="../../static/media_files/png/nav/call-centr.png" alt="call" title="Колл-центр" />
+            </a>
+
+
+            <a href="#"  onclick="history.back();return false">
+                <img class="img_menu" width='97' height='97 ' src="{{url_for('static', filename='media_files/png/nav/btn_back.png') }}" alt="info" title="На главную" />
+            </a>
+    </section>
+    <section class="services">
+
+            <a class="content__link" href="http://192.168.200.171/mfc/">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ais.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden"> АИС МФЦ</span>
+                <br>
+                <span class="hidden">страница авторизации</span>
+            </a>
+
+            <a class="content__link" href="http://192.168.200.171/mfc/Manage/ClaimAllFirst">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ais.png') }}" width="86" height="86" alt="СУО">
+                <br>
+                <span class="hidden">АИС МФЦ</span>
+                <br>
+                <span class="hidden">список дел</span>
+            </a>
+
+            <a class="content__link" href="">
+                <img id="img_links" src="../../static/media_files/png/ico-rosreestr-PKPVD-256.png" width="86" height="86">
+                <br>
+                <span class="hidden" >ПК ПВД</span>
+                <br>
+                <span class="hidden">страница авторизации</span>
+            </a>
+
+
+            <a class="content__link" href="">
+                <img id="img_links" src="../../static/media_files/png/ico-mfcbrown-256.png" width="86" height="86">
+                <br>
+                <span class="hidden">Портал МФЦ</span>
+                <br>
+                <span class="hidden">Главная страница</span>
+            </a>
+
+            <a class="content__link" href="">
+                <img id="img_links" src="../../static/media_files/png/ico-gosuslugi-2-256.png" width="86" height="86">
+                <br>
+                <span class="hidden">ГосУслуги</span>
+                <br>
+                <span class="hidden">верификация</span>
+            </a>
+
+            <a class="content__link" href="">
+                <img id="img_links" src="../../static/media_files/png/ico-gosuslugi-covid-256.png" width="86" height="86">
+                <br>
+                <span class="hidden">ГосУслуги</span>
+                <br>
+                <span class="hidden">QR код</span>
+            </a>
+
+
+            <a class="content__link" href="https://esia.gosuslugi.ru/profile/user/personal">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-gosuslugi-APM-3-256.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">ГосУслуги</span>
+                <br>
+                <span class="hidden">короткий код</span>
+            </a>
+
+
+            <a class="content__link" href="https://lk.gosuslugi.ru/settings/account">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-gosuslugi-APM-3-256.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">ГосУслуги</span>
+                <br>
+                <span class="hidden"> длинный код</span>
+            </a>
+
+        <a class="content__link" href="https://fias.nalog.ru/">
+                <img id="img_links" src="../../static/media_files/png/fadn.png" width="86" height="86">
+                <br>
+                <span class="hidden">ФАДН</span>
+                <br>
+                <span class="hidden">КМНС</span>
+            </a>
+        <a class="content__link" href="https://fias.nalog.ru/">
+                <img id="img_links" src="../../static/media_files/png/fias.png" width="86" height="86">
+                <br>
+                <span class="hidden">ФИАС</span>
+                <br>
+                <span class="hidden">Проверка Адреса</span>
+            </a>
+            <a class="content__link" href="#">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/sber.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">Сбер</span>
+                <br>
+                <span class="hidden">мои платежи</span>
+            </a>
+
+            <a class="content__link" href="#">
+                    <img  id="img_links" src="{{ url_for('static', filename='media_files/png/itcom.png') }}">
+                    <br>
+                    <span class="hidden">IT COM</span>
+                    <br>
+                    <span class="hidden">ЭЦП</span>
+            </a>
+
+
+
+
+
+            <a class="content__link" href="https://mail.mfchmao.ru/">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-mail-zimbra2-256.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">Zimbra</span>
+                <br>
+                <span class="hidden">корпоративная почта </span>
+            </a>
+
+            <a class="content__link" href="">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-primeGroup1-transparent-256.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">СЭД</span>
+                <br>
+                <span class="hidden">СЭД Дело Веб</span>
+            </a>
+
+
+
+        <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/logo-top-2-special-color-1.svg') }}">
+                <br>
+                <span class="hidden"> Росреестр </span>
+                <br>
+                <span class="hidden">Главная страница</span>
+        </a>
+        <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/pristavi.svg') }}" alt="">
+                <br>
+                <span class="hidden">Приставы</span>
+                <br>
+                <span class="hidden">Узнать о долгах</span>
+        </a>
+         <a class="content__link" href="#">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/passport.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">МВД</span>
+                <br>
+                <span class="hidden">Проверка паспорта</span>
+            </a>
+
+
+            <a class="content__link" href="https://propfr.ru/check_snils.html">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/snils.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">Проверка СНИЛС</span>
+                <br>
+                <span class="hidden">Форма проверки СНИЛС</span>
+            </a>
+        <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/inn.png') }}" alt="">
+                <br>
+                <span class="hidden"> Узнать ИНН </span>
+                <br>
+                <span class="hidden"> Сведения о физ лице </span>
+        </a>
+
+
+                <a class="content__link" href="https://mail.mfchmao.ru/">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ndfl13.png') }}" width="86" height="86">
+                <br>
+                <span class="hidden">Декларации</span>
+                <br>
+                <span class="hidden">Рабочая папка</span>
+            </a>
+
+            <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/vidacha.png') }}">
+                <br>
+                <span class="hidden">Выдача</span>
+                <br>
+                <span class="hidden">Рабочая папка</span>
+            </a>
+        <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/folder_sotrudniki.png') }}">
+                <br>
+                <span class="hidden">Сотрудники</span>
+                <br>
+                <span class="hidden">Рабочая папка</span>
+        </a>
+        <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/graphics.png') }}">
+                <br>
+                <span class="hidden">Графики работы</span>
+                <br>
+                <span class="hidden">Рабочая папка</span>
+        </a>
+
+        <a class="content__link" href="#">
+                <img  id="img_links" src="{{ url_for('static', filename='media_files/png/uslugi.png') }}">
+                <br>
+                <span class="hidden">Услуги</span>
+                <br>
+                <span class="hidden">Рабочая папка</span>
+        </a>
+
+
+    </section>
+
+{% endblock %}
+
+

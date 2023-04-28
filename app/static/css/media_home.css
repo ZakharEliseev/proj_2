@@ -1,0 +1,48 @@
+@media only screen and (max-width: 1599px){
+    .content__link {
+        padding: 22px;
+        max-width: 66px;
+        max-height: 96px;
+        
+      }
+    .name_content_link{
+        font-size: 12px;
+    }
+    .title_content_links{
+        font-size: 20px;
+        padding: 12px;
+    }
+    .logo{
+        width: 200px;
+    }
+    .weather{
+        width: 200px;
+    }
+    #eventCalendar{
+        width: 264px;
+    }
+}
+@media only screen and (max-width: 1205px){
+    .content__link {
+        padding: 22px;
+        max-width: 46px;
+        max-height: 76px;
+        
+      }
+    .name_content_link{
+        font-size: 13px;
+    }
+    .title_content_links{
+        font-size: 20px;
+        padding: 25px;
+    }
+    .logo{
+        width: 200px;
+    }
+    .weather{
+        width: 190px;
+    }
+    #eventCalendar{
+        width: 254px;
+    }
+}

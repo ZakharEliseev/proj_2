@@ -1,0 +1,32 @@
+# import time
+# from functools import wraps
+
+# def calculate_time(func):
+#     @wraps(func)
+#     def wrapper(*args, **kwargs):
+#         start_time = time.time()
+#         result = func(*args, **kwargs)
+#         end_time = time.time()
+#         print(f"Время выполнения функции '{func.__name__}': {end_time - start_time:.5f} секунд")
+#         return result
+#     return wrapper
+
+# from bs4 import BeautifulSoup 
+# import requests
+# # def get_data_by_bs4():
+# #     r = requests.get(url)
+# #     soup = BeautifulSoup(r.text, 'html5lib')
+# #     return soup.find_all('td', class_='style363')[1].get_text()
+
+def get_data_arm_3_by_selenium():
+    options = webdriver.FirefoxOptions()
+    options.add_argument('-headless')
+    driver = webdriver.Firefox(options=options)
+    driver.get("http://10.107.10.112/index.html")
+    elem = driver.find_element(By.ID,'DEVICE')
+    elem.click()
+    time.sleep(1)
+    element = driver.find_element(By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')
+    text = element.text.strip()
+    driver.quit()
+    return text
