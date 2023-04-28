@@ -166,3 +166,4 @@ png/
 jpg/
 *.ico
 *.db
+app.db

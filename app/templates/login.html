@@ -28,11 +28,20 @@
             <div class="form-outline mb-4">
                 {{ form.username(type="email", id="typeEmailX-2", class="form-control form-control-lg") }}
                 {{ form.username.label(class="form-label", for="typeEmailX-2")}}
+                <br>
+                {%  for error in form.username.errors %}
+                    <span style="color: #000000;"><strong>[{{ error }}]</strong></span>
+                {% endfor %}
             </div>
             <!-- passwd -->
             <div class="form-outline mb-4">
                 {{ form.password(type="password", id="typePasswordX-2", class="form-control form-control-lg") }}
                 {{ form.password.label(class="form-label", for="typePasswordX-2")}}
+                 <br>
+                {% for error in form.password.errors %}
+
+                    <span style="color: #000000;"><strong>[{{ error }}]</strong></span>
+                {% endfor %}
             </div>
 
             <!-- Checkbox -->

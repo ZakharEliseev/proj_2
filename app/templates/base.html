@@ -27,11 +27,19 @@
     <div class="icon-container">
       <a href="{{ url_for('index') }}"><div class="icon icon-enter"><i class="fa fa-user"></i></div></a>
       <a href="{{ url_for('login') }}"><div class="icon icon-collapse"><i class="fa fa-sign-in"></i></div></a>
-      <a href="{{ url_for('index') }}"><div class="icon icon-rotate"><i class="fa fa-phone"></i></div></a>
+      <a href="{{ url_for('login') }}"><div class="icon icon-rotate"><i class="fa fa-phone"></i></div></a>
     </div>
   </div>
 </div>
-
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 {% block body %}
 
 {% endblock %}
