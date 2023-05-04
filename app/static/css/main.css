@@ -72,4 +72,9 @@ body {
   font-family: 'BreeCYR-Light';
 }
 
+.current_user{
+  position: absolute;
+  top: 80px;
+  left: 15px;
+}
 
