@@ -167,3 +167,4 @@ jpg/
 *.ico
 *.db
 app.db
+migrations/
