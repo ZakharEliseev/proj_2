@@ -3,7 +3,7 @@ from app import app, db
 from flask import render_template, redirect, url_for, flash
 from app.forms import LoginForm, RegistrationForm, EditProfile
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, UserPasswords
 from flask import request
 from urllib.parse import urlsplit
 
@@ -124,12 +124,12 @@ def user(username):
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
-    form = EditProfile()
+    form = EditProfile(obj=current_user)
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.phone_number = form.phone_number.data
         current_user.position = form.position.data
-
+        current_user.password.password_ais = form.password_ais.data
         db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))
@@ -137,6 +137,7 @@ def edit_profile():
         current_user.email = current_user.email
         current_user.phone_number = current_user.phone_number
         current_user.position = current_user.position
+        current_user.password.password_ais = current_user.password.password_ais
     return render_template("edit_profile.html", form=form)
 
 

@@ -70,3 +70,4 @@ class EditProfilePasswd(FlaskForm):
     password_enter = StringField("Пароль СУО", validators=[Length(min=0, max=12)])
     password_mail = StringField("Пароль почта", validators=[Length(min=0, max=12)])
     password_home = StringField("Пароль этот сайт", validators=[Length(min=0, max=12)])
+    submit = SubmitField("Сохранить")

@@ -19,7 +19,7 @@ class User(UserMixin, db.Model):
     )
     phone_number = db.Column(db.String(128))
     position = db.Column(db.String(128))
-    password = db.relationship("UserPasswords", backref="user", lazy="dynamic")
+    passwords = db.relationship("UserPassword", backref="user", lazy="dynamic")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
