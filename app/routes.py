@@ -129,6 +129,7 @@ def edit_profile():
         current_user.email = form.email.data
         current_user.phone_number = form.phone_number.data
         current_user.position = form.position.data
+
         db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))

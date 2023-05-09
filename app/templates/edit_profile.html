@@ -65,7 +65,17 @@
         <div class="card shadow-2-strong" style="border-radius: 1rem; background-color: #b38c6c">
           <div class="card-body p-5 text-center">
           <h3 class="mb-5">Редактирование паролей</h3>
+<form action="" method="post">
+{{ form.hidden_tag() }}
+<div class="form-outline mb-4">
+        {{ form.password_ais(type="position", id="typeEmailX-2", class="form-control form-control-lg") }}<br>
+        {{ form.password_ais.label(class="form-label", for="typeEmailX-2")}}
+        {% for error in form.password_ais.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+</div>
 
+</form>
 
 </div>
     </div>
