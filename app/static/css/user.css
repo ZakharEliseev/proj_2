@@ -1,0 +1,26 @@
+.img_profile{
+    width: 15%;
+    height: auto;
+}
+
+.card{
+    background-color: #b38c6c;
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #000000 !important;
+}
+
+.p-3{
+    background-color: #b38c6c;
+}
+
+.my-3{
+    --bs-text-opacity: 1;
+    color: #000000 !important;
+}
+
+.mb-0{
+    color: #000000 !important;
+}

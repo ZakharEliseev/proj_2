@@ -1,6 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms import (StringField
+                    , PasswordField
+                    , BooleanField
+                    , SubmitField
+                    , StringField
+                    , TextAreaField
+                    , SubmitField
+                    , DateField
+                     )
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from app.models import User
 
 
@@ -12,10 +20,15 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Имя пользователя', validators=[DataRequired()])
+    username = StringField('Логин', validators=[DataRequired()])
+    fio = StringField('ФИО', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Пароль', validators=[DataRequired()])
     password2 = PasswordField('Повторите пароль', validators=[DataRequired(), EqualTo('password')])
+    phone_number = StringField('Телефон', validators=[DataRequired(), Length(min=10, max=12,
+                                              message='Телефон должен быть от 10 до 12 символов')])
+    date_of_birth = DateField('Дата рождения', validators=[DataRequired()], format='%d.%m.%Y')
+    position = StringField('Должность', validators=[DataRequired()])
     submit = SubmitField('Регистрация')
 
     def validate_username(self, username):
@@ -27,3 +40,19 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Пожалуйста используйте другой email')
+
+
+class EditProfile(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    phone_number = StringField('Номер телефона', validators=[Length(min=0, max=12)])
+    position = StringField('Должность', validators=[DataRequired()])
+    submit = SubmitField('Сохранить')
+
+
+
+class EditProfilePasswd(FlaskForm):
+    ais = StringField('Пароль АИС', validators=[Length(min=0, max=12)])
+    pvd = StringField('Пароль ПВД', validators=[Length(min=0, max=12)])
+    enter = StringField('Пароль СУО', validators=[Length(min=0, max=12)])
+    mail = StringField('Пароль почта', validators=[Length(min=0, max=12)])
+    home = StringField('Пароль этот сайт', validators=[Length(min=0, max=12)])

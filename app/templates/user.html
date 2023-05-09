@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" ><!-- хз -->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'><!-- хз -->
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+{% endblock %}
+{% block body %}
+
+
+<section>
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+              <img src="{{ user.avatar(128) }}">
+            <h5 class="my-3">{{ current_user.fio }}</h5>
+            <p class="text-muted mb-1">{{ current_user.position }}</p>
+          </div>
+        </div>
+        <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0"><section>Пароли</section></p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ais.png')}}" alt=""></i>
+                <p class="mb-0">пароль_АИС</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ico-rosreestr-PKPVD-256.png')}}" alt=""></i>
+                <p class="mb-0">пароль_ПВД</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i><img class='img_profile' src="{{url_for('static', filename='media_files/png/ico-enter-256.png') }}" alt=""></i>
+                <p class="mb-0">пароль_СУО</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i><img class='img_profile' id="img_links" src="{{ url_for('static', filename='media_files/png/ico-mail-zimbra2-256.png') }}" alt=""></i>
+                <p class="mb-0">пароль_почта</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ico-mfcbrown-256.png') }}" alt=""></i>
+                <p class="mb-0">пароль_от_этого_сайта</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">ФИО</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ current_user.fio }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ current_user.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Телефон</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ current_user.phone_number }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Дата рождения</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ current_user.date_of_birth }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Время последнего посещения</p>
+              </div>
+              <div class="col-sm-9">
+                  {% if user.last_seen %}<p class="text-muted mb-0">{{ user.last_seen }}</p>{% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <a href="#"  onclick="history.back();return false">
+        <img class="img_menu" width='97' height='97 ' src="{{url_for('static', filename='media_files/png/nav/btn_back.png') }}" alt="Назад" title="Назад" />
+    </a>
+{% endblock %}

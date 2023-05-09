@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">  <!-- фавиконка -->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}">
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/media_home.css') }}"><!-- медиа запросы-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" > <!-- хз -->
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'><!-- хз -->
@@ -25,12 +25,19 @@
 <div id="login">
   <div class="content-btn">
     <div class="icon-container">
-            <a href="{{ url_for('login') }}"><div class="icon icon-enter"><i class="fa fa-user"></i></div></a>
+            {% if request.path != url_for('edit_profile') %}
+            <a href="{{ url_for('user', username=current_user.username) }}"><div class="icon icon-enter"><i class="fa fa-user"></i></div></a>
             <a href="{{ url_for('logout') }}"><div class="icon icon-collapse"><i class="fa fa-sign-in"></i></div></a>
-            <a href="{{ url_for('logout') }}"><div class="icon icon-rotate"><i class="fa fa-phone"></i></div></a>
-        {% if current_user.is_authenticated %}
-            <p class="current_user">Авторизован: {{ current_user.username }}</p>
-        {% endif %}
+            <a href="{{ url_for('its') }}"><div class="icon icon-rotate"><i class="fa fa-phone"></i></div></a>
+            {% endif %}
+            {% if request.path == url_for('user', username=current_user.username) %}
+            <a href="{{ url_for('edit_profile') }}"><div class="icon icon-enter"><i class="fa fa-bars"></i></div></a>
+            {% endif %}
+            {% if request.path != url_for('edit_profile') %}
+            {% if current_user.is_authenticated %}
+                <p class="current_user">Авторизован: {{ current_user.username }}</p>
+            {% endif %}
+            {% endif %}
     </div>
   </div>
 </div>
