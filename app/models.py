@@ -1,7 +1,5 @@
 from datetime import datetime
-
 from sqlalchemy import func
-
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -33,6 +31,15 @@ class User(UserMixin, db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+
+class UserPasswords(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    password_ais = db.Column(db.String(128))
+    password_pvd = db.Column(db.String(128))
+    password_enter = db.Column(db.String(128))
+    password_mail = db.Column(db.String(128))
+    password_home = db.Column(db.String(128))
 
 
 @login.user_loader

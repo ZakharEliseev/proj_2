@@ -22,3 +22,8 @@
 .form-control-lg{
   font-size: 0.9rem;
 }
+
+.vh-101{
+  display: flex;
+  justify-content: center;
+}
