@@ -1,7 +1,7 @@
 from datetime import datetime
 from app import app, db
 from flask import render_template, redirect, url_for, flash
-from app.forms import LoginForm, RegistrationForm, EditProfile
+from app.forms import LoginForm, RegistrationForm, EditProfile, EditProfilePasswd
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, UserPasswords
 from flask import request
@@ -125,10 +125,14 @@ def user(username):
 @login_required
 def edit_profile():
     form = EditProfile()
+    form_passwd = EditProfilePasswd()
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.phone_number = form.phone_number.data
         current_user.position = form.position.data
+        db.session.query(UserPasswords).filter_by(
+            UserPasswords.user_id == current_user.id
+        ).update({"password_ais": 123})
         db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))
@@ -136,7 +140,7 @@ def edit_profile():
         current_user.email = current_user.email
         current_user.phone_number = current_user.phone_number
         current_user.position = current_user.position
-    return render_template("edit_profile.html", form=form)
+    return render_template("edit_profile.html", form=form, form_passwd=form_passwd)
 
 
 if __name__ == "__main__":

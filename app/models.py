@@ -19,7 +19,7 @@ class User(UserMixin, db.Model):
     )
     phone_number = db.Column(db.String(128))
     position = db.Column(db.String(128))
-    passwords = db.relationship("UserPasswords", backref="user", lazy="dynamic")
+    passwords = db.relationship("UserPasswords", backref="user_pswd", lazy="dynamic")
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -37,11 +37,11 @@ class User(UserMixin, db.Model):
 
 class UserPasswords(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    password_ais = db.Column(db.String(128))
-    password_pvd = db.Column(db.String(128))
-    password_enter = db.Column(db.String(128))
-    password_mail = db.Column(db.String(128))
-    password_home = db.Column(db.String(128))
+    password_ais = db.Column(db.String(128), server_default="654321", default="123456")
+    password_pvd = db.Column(db.String(128), server_default="654321", default="123456")
+    password_enter = db.Column(db.String(128), server_default="654321", default="123456")
+    password_mail = db.Column(db.String(128), server_default="654321", default="123456")
+    password_home = db.Column(db.String(128), server_default="654321", default="123456")
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
 
