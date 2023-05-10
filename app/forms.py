@@ -59,15 +59,16 @@ class RegistrationForm(FlaskForm):
 
 class EditProfile(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
-    phone_number = StringField("Номер телефона", validators=[Length(min=0, max=12)])
+    phone_number = StringField("Номер телефона", validators=[Length(min=1, max=13)])
     position = StringField("Должность", validators=[DataRequired()])
     submit = SubmitField("Сохранить")
 
 
 class EditProfilePasswd(FlaskForm):
-    password_ais = StringField("Пароль АИС", validators=[Length(min=0, max=12)])
-    password_pvd = StringField("Пароль ПВД", validators=[Length(min=0, max=12)])
-    password_enter = StringField("Пароль СУО", validators=[Length(min=0, max=12)])
-    password_mail = StringField("Пароль почта", validators=[Length(min=0, max=12)])
-    password_home = StringField("Пароль этот сайт", validators=[Length(min=0, max=12)])
-    submit = SubmitField("Сохранить")
+    password_ais = StringField("Пароль АИС", validators=[Length(min=6, max=20)])
+    password_pvd = StringField("Пароль ПВД", validators=[Length(min=6, max=20)])
+    password_enter = StringField("Пароль СУО", validators=[Length(min=6, max=20)])
+    password_mail = StringField("Пароль почта", validators=[Length(min=6, max=20)])
+    password_home = StringField("Пароль от этого сайта", validators=[Length(min=6, max=20)])
+    password_delo = StringField("Пароль СЭД", validators=[Length(min=6, max=20)])
+    submit = SubmitField("Обновить пароли!")

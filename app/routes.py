@@ -23,6 +23,7 @@ list_endpoints = [
     "admins",
     "baks",
     "its",
+    "edit_passwords",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -68,7 +69,7 @@ def main_its():
 
 
 @app.route("/login", endpoint="login", methods=["GET", "POST"])
-def main():
+def login():
     if current_user.is_authenticated:
         return render_template(url_for("index"))
     form = LoginForm()
@@ -106,8 +107,18 @@ def register():
             position=form.position.data,
         )
         user.set_password(form.password.data)
+        new_passwords = UserPasswords(
+            password_ais="задайте пароль!",
+            password_pvd="задайте пароль!",
+            password_enter="задайте пароль!",
+            password_mail="задайте пароль!",
+            password_home="задайте пароль!",
+            password_delo="задайте пароль!",
+            user_pswd=user,
+        )
         with app.app_context():
             db.session.add(user)
+            db.session.add(new_passwords)
             db.session.commit()
         flash("Поздравляю! Вы зарегестрированы!")
         return redirect(url_for("login"))
@@ -125,22 +136,49 @@ def user(username):
 @login_required
 def edit_profile():
     form = EditProfile()
-    form_passwd = EditProfilePasswd()
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.phone_number = form.phone_number.data
         current_user.position = form.position.data
-        db.session.query(UserPasswords).filter_by(
-            UserPasswords.user_id == current_user.id
-        ).update({"password_ais": 123})
         db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))
     elif request.method == "GET":
-        current_user.email = current_user.email
-        current_user.phone_number = current_user.phone_number
-        current_user.position = current_user.position
-    return render_template("edit_profile.html", form=form, form_passwd=form_passwd)
+        form.email.data = current_user.email
+        form.phone_number.data = current_user.phone_number
+        form.position.data = current_user.position
+    return render_template("edit_profile.html", form=form)
+
+
+
+@app.route("/edit_passwords/<int:user_id>", methods=["GET", "POST"])
+@login_required
+def edit_passwords(user_id):
+    form_passwd = EditProfilePasswd()
+    user = User.query.get_or_404(user_id)
+    passwords = user.passwords.first()
+    if form_passwd.validate_on_submit():
+        UserPasswords.query.filter(UserPasswords.user_id == current_user.id).update({
+            UserPasswords.password_ais: form_passwd.password_ais.data,
+            UserPasswords.password_pvd: form_passwd.password_pvd.data,
+            UserPasswords.password_enter: form_passwd.password_enter.data,
+            UserPasswords.password_mail: form_passwd.password_mail.data,
+            UserPasswords.password_home: form_passwd.password_home.data,
+            UserPasswords.password_delo: form_passwd.password_delo.data
+        })
+        db.session.commit()
+        flash("Изменения сохранены")
+        return redirect(url_for("user", username=current_user.username))
+    elif request.method == "GET":
+        form_passwd.password_ais.data = passwords.password_ais
+        form_passwd.password_pvd.data = passwords.password_pvd
+        form_passwd.password_enter.data = passwords.password_enter
+        form_passwd.password_mail.data = passwords.password_mail
+        form_passwd.password_home.data = passwords.password_home
+        form_passwd.password_delo.data = passwords.password_delo
+    return render_template(
+        "edit_passwords.html", form_passwd=form_passwd, user=user
+    )
 
 
 if __name__ == "__main__":

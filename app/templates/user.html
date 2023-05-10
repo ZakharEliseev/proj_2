@@ -14,7 +14,7 @@
 
 
 <section>
-  <div class="container py-5">
+  <div class="container py-5 mt3">
     <div class="row">
       <div class="col-lg-4">
         <div class="card mb-4">
@@ -32,23 +32,27 @@
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ais.png')}}" alt=""></i>
-                <p class="mb-0"></p>
+                <p class="mb-0">{{  user.passwords.first().password_ais }}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ico-rosreestr-PKPVD-256.png')}}" alt=""></i>
-                <p class="mb-0">пароль_ПВД</p>
+                <p class="mb-0">{{  user.passwords.first().password_pvd }}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i><img class='img_profile' src="{{url_for('static', filename='media_files/png/ico-enter-256.png') }}" alt=""></i>
-                <p class="mb-0">пароль_СУО</p>
+                <p class="mb-0">{{  user.passwords.first().password_enter }}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i><img class='img_profile' id="img_links" src="{{ url_for('static', filename='media_files/png/ico-mail-zimbra2-256.png') }}" alt=""></i>
-                <p class="mb-0">пароль_почта</p>
+                <p class="mb-0">{{  user.passwords.first().password_mail }}</p>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                 <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ico-mfcbrown-256.png') }}" alt=""></i>
-                <p class="mb-0">пароль_от_этого_сайта</p>
+                <p class="mb-0">{{  user.passwords.first().password_home }}</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i><img class='img_profile' src="{{ url_for('static', filename='media_files/png/ico-primeGroup1-transparent-256.png') }}" alt=""></i>
+                <p class="mb-0">{{  user.passwords.first().password_delo }}</p>
               </li>
             </ul>
           </div>

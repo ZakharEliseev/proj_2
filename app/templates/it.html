@@ -10,11 +10,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" > <!-- хз -->
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
 {% endblock %}
+
+
 {% block body %}
+
     <section class="menu">
-            <a class="img_menu" id="current_page"  href="{{ url_for('admins') }}" >
-               Меню Инженеров
-           </a>
             <a class="img_menu" href="{{ url_for('index') }}" >
                 <img  src="{{ url_for('static', filename='media_files/png/nav/nav-01.png') }}" alt="Home" title="МФЦ" />
            </a>
@@ -43,7 +43,9 @@
                 <img class="img_menu" width='97' height='97 ' src="{{url_for('static', filename='media_files/png/nav/btn_back.png') }}" alt="info" title="На главную" />
             </a>
     </section>
+
     <section class="services">
+
             <a class="content__link" href="http://192.168.200.171/mfc/">
                 <img id="img_links" src="{{ url_for('static', filename='media_files/png/ais.png') }}" width="86" height="86" alt="">
                 <br>
