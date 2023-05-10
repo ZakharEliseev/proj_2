@@ -135,7 +135,7 @@ def user(username):
 @app.route("/edit_profile", methods=["GET", "POST"])
 @login_required
 def edit_profile():
-    form = EditProfile()
+    form = EditProfile(current_user.username)
     if form.validate_on_submit():
         current_user.email = form.email.data
         current_user.phone_number = form.phone_number.data
@@ -150,7 +150,6 @@ def edit_profile():
     return render_template("edit_profile.html", form=form)
 
 
-
 @app.route("/edit_passwords/<int:user_id>", methods=["GET", "POST"])
 @login_required
 def edit_passwords(user_id):
@@ -158,14 +157,16 @@ def edit_passwords(user_id):
     user = User.query.get_or_404(user_id)
     passwords = user.passwords.first()
     if form_passwd.validate_on_submit():
-        UserPasswords.query.filter(UserPasswords.user_id == current_user.id).update({
-            UserPasswords.password_ais: form_passwd.password_ais.data,
-            UserPasswords.password_pvd: form_passwd.password_pvd.data,
-            UserPasswords.password_enter: form_passwd.password_enter.data,
-            UserPasswords.password_mail: form_passwd.password_mail.data,
-            UserPasswords.password_home: form_passwd.password_home.data,
-            UserPasswords.password_delo: form_passwd.password_delo.data
-        })
+        UserPasswords.query.filter(UserPasswords.user_id == current_user.id).update(
+            {
+                UserPasswords.password_ais: form_passwd.password_ais.data,
+                UserPasswords.password_pvd: form_passwd.password_pvd.data,
+                UserPasswords.password_enter: form_passwd.password_enter.data,
+                UserPasswords.password_mail: form_passwd.password_mail.data,
+                UserPasswords.password_home: form_passwd.password_home.data,
+                UserPasswords.password_delo: form_passwd.password_delo.data,
+            }
+        )
         db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))
@@ -176,10 +177,8 @@ def edit_passwords(user_id):
         form_passwd.password_mail.data = passwords.password_mail
         form_passwd.password_home.data = passwords.password_home
         form_passwd.password_delo.data = passwords.password_delo
-    return render_template(
-        "edit_passwords.html", form_passwd=form_passwd, user=user
-    )
+    return render_template("edit_passwords.html", form_passwd=form_passwd, user=user)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=True)
+    app.run(debug=False, use_reloader=True)

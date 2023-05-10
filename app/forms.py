@@ -63,12 +63,26 @@ class EditProfile(FlaskForm):
     position = StringField("Должность", validators=[DataRequired()])
     submit = SubmitField("Сохранить")
 
+    def __init__(self, original_username, *args, **kwargs):
+        super(EditProfile, self).__init__(*args, **kwargs)
+        self.original_username = original_username
+
+    def validate_username(self, username):
+        if username.data != self.original_username:
+            user = User.query.filter_by(username=self.username.data).first()
+            if user is not None:
+                raise ValidationError(
+                    "Пожалуйста, используйте другое имя пользователя."
+                )
+
 
 class EditProfilePasswd(FlaskForm):
     password_ais = StringField("Пароль АИС", validators=[Length(min=6, max=20)])
     password_pvd = StringField("Пароль ПВД", validators=[Length(min=6, max=20)])
     password_enter = StringField("Пароль СУО", validators=[Length(min=6, max=20)])
     password_mail = StringField("Пароль почта", validators=[Length(min=6, max=20)])
-    password_home = StringField("Пароль от этого сайта", validators=[Length(min=6, max=20)])
+    password_home = StringField(
+        "Пароль от этого сайта", validators=[Length(min=6, max=20)]
+    )
     password_delo = StringField("Пароль СЭД", validators=[Length(min=6, max=20)])
     submit = SubmitField("Обновить пароли!")
