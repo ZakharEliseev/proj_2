@@ -37,11 +37,12 @@ class User(UserMixin, db.Model):
 
 class UserPasswords(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    password_ais = db.Column(db.String(128), server_default="654321", default="123456")
-    password_pvd = db.Column(db.String(128), server_default="654321", default="123456")
-    password_enter = db.Column(db.String(128), server_default="654321", default="123456")
-    password_mail = db.Column(db.String(128), server_default="654321", default="123456")
-    password_home = db.Column(db.String(128), server_default="654321", default="123456")
+    password_ais = db.Column(db.String(128))
+    password_pvd = db.Column(db.String(128))
+    password_enter = db.Column(db.String(128))
+    password_mail = db.Column(db.String(128))
+    password_home = db.Column(db.String(128))
+    password_delo = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
 

@@ -16,28 +16,29 @@
     <script async src="https://static1.meteolabs.ru/widgetjs/?id=id292b0ba1f27c1"></script> <!-- скрипт для погоды-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/font.css') }}"> <!-- стили для календаря-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar_theme_responsive.css') }}"> <!-- стили для календаря-->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar.css') }}"><title></title>
-        <!-- стили для календаря-->
-
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar.css') }}"><title></title><!-- стили для календаря-->
 {% endblock %}
 </head>
+{% if current_user.is_authenticated %}
+    <p class="current_user">Авторизован: {{ current_user.username }}</p>
+{% endif %}
 
 <div id="login">
+
   <div class="content-btn">
+
     <div class="icon-container">
-            {% if request.path != url_for('edit_profile') %}
-            <a href="{{ url_for('user', username=current_user.username) }}"><div class="icon icon-enter"><i class="fa fa-user"></i></div></a>
-            <a href="{{ url_for('logout') }}"><div class="icon icon-collapse"><i class="fa fa-sign-in"></i></div></a>
-            <a href="{{ url_for('its') }}"><div class="icon icon-rotate"><i class="fa fa-phone"></i></div></a>
+                <a href="{{ url_for('index') }}"><div class="icon icon-collapse" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Главная страница"><i class="fa fa-home"></i></div></a>
+            {% if request.path != url_for('edit_profile')  and ( not 'edit_passwords' in request.path) %}
+                <a href="{{ url_for('user', username=current_user.username) }}"><div class="icon icon-enter" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Страница профиля"><i class="fa fa-user"></i></div></a>
+                <a href="{{ url_for('logout') }}"><div class="icon icon-collapse" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Выйти"><i class="fa fa-sign-in"></i></div></a>
+                <a href="{{ url_for('its') }}"><div class="icon icon-rotate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Телефонный справочник"><i class="fa fa-phone"></i></div></a>
             {% endif %}
             {% if request.path == url_for('user', username=current_user.username) %}
-            <a href="{{ url_for('edit_profile') }}"><div class="icon icon-enter"><i class="fa fa-bars"></i></div></a>
+            <a href="{{ url_for('edit_profile') }}"><div class="icon icon-enter" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Редактирование профиля"><i class="fa fa-bars"></i></div></a>
+            <a href="{{ url_for('edit_passwords', user_id=user.id) }}"><div class="icon icon-enter passwd" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Редактирование паролей"><i class="fa fa-bars"></i></div></a>
             {% endif %}
-            {% if request.path != url_for('edit_profile') %}
-            {% if current_user.is_authenticated %}
-                <p class="current_user">Авторизован: {{ current_user.username }}</p>
-            {% endif %}
-            {% endif %}
+
     </div>
   </div>
 </div>
@@ -50,6 +51,7 @@
 </ul>
 {% endif %}
 {% endwith %}
+
 {% block body %}
 
 {% endblock %}
