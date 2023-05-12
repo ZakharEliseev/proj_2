@@ -32,6 +32,6 @@ if not app.debug:
     )
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
-
+    # чтобы видеть, когда сервер был запущен\перезапущен
     app.logger.setLevel(logging.INFO)
     app.logger.info("Application startup")
