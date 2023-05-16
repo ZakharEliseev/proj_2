@@ -8,3 +8,14 @@ url7 = "http://10.107.10.101/index.html"
 url8 = "http://10.107.10.104/index.html"
 url9 = "http://10.107.10.102/startwlm/Hme_Toner.htm"
 url10 = "http://10.107.10.120/startwlm/Hme_Toner.htm"
+
+address_arm_1 = '10.107.10.110'
+address_arm_2 = '10.107.10.111'
+address_arm_3 = '10.107.10.112'
+address_arm_4 = '10.107.10.113'
+address_arm_5 = '10.107.10.114'
+address_arm_6 = '10.107.10.115'
+address_arm_7 = '10.107.10.101'
+address_arm_8 = '10.107.10.104'
+address_arm_9 = '10.107.10.102'
+address_arm_10 = '10.107.10.120'

@@ -7,3 +7,4 @@ import time
 from bs4 import BeautifulSoup as bs
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from ping3 import ping
