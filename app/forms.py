@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileRequired
 from wtforms import (
     StringField,
     PasswordField,
@@ -7,9 +8,9 @@ from wtforms import (
     StringField,
     TextAreaField,
     SubmitField,
-    DateField,
+    DateField, FileField, IntegerField,
 )
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, NumberRange
 from app.models import User
 
 
@@ -82,3 +83,17 @@ class EditProfilePasswd(FlaskForm):
     password_home = StringField("Пароль от этого сайта", validators=[Length(min=6, max=20)])
     password_delo = StringField("Пароль СЭД", validators=[Length(min=6, max=20)])
     submit = SubmitField("Обновить пароли!")
+
+
+class UploadFormTIFF(FlaskForm):
+    file = FileField(validators=[FileRequired()])
+    reduction = IntegerField('Процент сжатия  до %(меньше значение - больше сжатия)', render_kw={"placeholder": "50%"}, validators=[DataRequired(), NumberRange(min=1, max=99)])
+    submit = SubmitField('Загрузить для сжатия')
+
+
+class UploadFormPDF(FlaskForm):
+    file = FileField("File", validators=[DataRequired()])
+    resolution = IntegerField("DPI для сжатия как при сканировании, например 150.",
+                              default=150,
+                              validators=[DataRequired(), NumberRange(min=100, max=300)])
+    submit = SubmitField('Загрузить для сжатия')

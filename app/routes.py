@@ -1,12 +1,24 @@
+from tqdm import tqdm
+import os
 from datetime import datetime
+from PyPDF2 import PdfReader, PdfWriter
+from pdf2image import convert_from_path
 from app import app, db
-from flask import render_template, redirect, url_for, flash
-from app.forms import LoginForm, RegistrationForm, EditProfile, EditProfilePasswd
+from flask import render_template, redirect, url_for, flash, send_file, abort, request
+from app.forms import (
+    LoginForm,
+    RegistrationForm,
+    EditProfile,
+    EditProfilePasswd,
+    UploadFormTIFF, UploadFormPDF,
+)
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, UserPasswords
 from flask import request
 from urllib.parse import urlsplit
-
+from io import BytesIO
+from PIL import Image
+app.config["UPLOAD_FOLDER"] = "uploads"
 list_endpoints = [
     "main_index",
     "index",
@@ -24,6 +36,10 @@ list_endpoints = [
     "baks",
     "its",
     "edit_passwords",
+    "compressed_files_tiff",
+    "compressed_pdf",
+    "resize_pdf",
+    "compressed_files_pdf",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -150,7 +166,6 @@ def edit_profile():
     return render_template("edit_profile.html", form=form)
 
 
-
 @app.route("/edit_passwords/<int:user_id>", methods=["GET", "POST"])
 @login_required
 def edit_passwords(user_id):
@@ -158,14 +173,16 @@ def edit_passwords(user_id):
     user = User.query.get_or_404(user_id)
     passwords = user.passwords.first()
     if form_passwd.validate_on_submit():
-        UserPasswords.query.filter(UserPasswords.user_id == current_user.id).update({
-            UserPasswords.password_ais: form_passwd.password_ais.data,
-            UserPasswords.password_pvd: form_passwd.password_pvd.data,
-            UserPasswords.password_enter: form_passwd.password_enter.data,
-            UserPasswords.password_mail: form_passwd.password_mail.data,
-            UserPasswords.password_home: form_passwd.password_home.data,
-            UserPasswords.password_delo: form_passwd.password_delo.data
-        })
+        UserPasswords.query.filter(UserPasswords.user_id == current_user.id).update(
+            {
+                UserPasswords.password_ais: form_passwd.password_ais.data,
+                UserPasswords.password_pvd: form_passwd.password_pvd.data,
+                UserPasswords.password_enter: form_passwd.password_enter.data,
+                UserPasswords.password_mail: form_passwd.password_mail.data,
+                UserPasswords.password_home: form_passwd.password_home.data,
+                UserPasswords.password_delo: form_passwd.password_delo.data,
+            }
+        )
         db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))
@@ -176,9 +193,98 @@ def edit_passwords(user_id):
         form_passwd.password_mail.data = passwords.password_mail
         form_passwd.password_home.data = passwords.password_home
         form_passwd.password_delo.data = passwords.password_delo
-    return render_template(
-        "edit_passwords.html", form_passwd=form_passwd, user=user
-    )
+    return render_template("edit_passwords.html", form_passwd=form_passwd, user=user)
+
+
+def resize_tiff(image_file, percent):
+    with Image.open(image_file) as img:
+        width, height = img.size
+        new_width = int(width * (percent / 100))
+        new_height = int(height * (percent / 100))
+        resized_img = img.resize((new_width, new_height))
+        buffer = BytesIO()
+        resized_img.save(buffer, format="TIFF")
+        buffer.seek(0)
+    return buffer
+
+
+@app.route("/compressed_files_tiff", methods=["GET", "POST"])
+@login_required
+def compressed_files_tiff():
+    form = UploadFormTIFF()
+    if form.validate_on_submit():
+        file = form.file.data  # получение файла из формы
+        percent = form.reduction.data  # получение процента из формы
+        buffer = resize_tiff(file, percent)
+        return send_file(
+            buffer,
+            as_attachment=True,
+            mimetype="image/tiff",
+            download_name=form.file.data.filename,
+        )
+    return render_template("compressed_files_tiff.html", form=form)
+
+
+
+def compress_pdf(input_file, output_file, resolution):
+    # Конвертируем PDF в изображения
+    images = convert_from_path(input_file, dpi=resolution)
+    # Создаем папку для временных изображений
+    temp_dir = "temp_images"
+    os.makedirs(temp_dir, exist_ok=True)
+
+    out_images = []
+    for i, image in tqdm(enumerate(images), total=len(images), desc='Compressing images'):
+        # Уменьшаем разрешение изображения
+        reduced_image = image.resize((int(image.width * resolution / 72), int(image.height * resolution / 72)))
+        out_images.append(reduced_image)
+
+        # Сохраняем временное изображение
+        temp_path = os.path.join(temp_dir, f"temp_{i}.jpg")
+        reduced_image.save(temp_path)
+
+    # Соединяем изображения в PDF
+    out_images[0].save(output_file, save_all=True, append_images=out_images[1:])
+
+    # Удаляем временные изображения
+    for temp_image in os.listdir(temp_dir):
+        temp_image_path = os.path.join(temp_dir, temp_image)
+        os.remove(temp_image_path)
+
+    os.rmdir(temp_dir)
+
+
+@app.route("/compressed_files_pdf", methods=["GET", "POST"])
+@login_required
+def compressed_files_pdf():
+    form = UploadFormPDF()
+    if request.method == "POST" and form.validate_on_submit():
+        pdf_file = form.file.data
+        # reduction_percentage = form.reduction.data
+        resolution = form.resolution.data  # Установите желаемое разрешение здесь
+
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], pdf_file.filename)
+        pdf_file.save(file_path)
+
+        pdf_reader = PdfReader(file_path)
+        pdf_writer = PdfWriter()
+
+        for page in tqdm(pdf_reader.pages, desc='Compressing pages'):
+            page.compress_content_streams()
+            pdf_writer.add_page(page)
+
+        reduced_path = os.path.join(app.config['UPLOAD_FOLDER'], 'сжато-' + pdf_file.filename)
+
+        # Вызываем функцию compress_pdf
+        compress_pdf(file_path, reduced_path, resolution)
+
+        with open(reduced_path, 'rb') as f:
+            data = BytesIO(f.read())
+        data.seek(0)
+        return send_file(data, as_attachment=True, download_name='сжато-' + pdf_file.filename,
+                         mimetype='application/pdf')
+
+    return render_template('compressed_files_pdf.html', form=form)
 
 
 if __name__ == "__main__":
