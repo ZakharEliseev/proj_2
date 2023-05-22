@@ -1,9 +1,9 @@
+from app import app, db
 from tqdm import tqdm
 import os
 from datetime import datetime
 from PyPDF2 import PdfReader, PdfWriter
 from pdf2image import convert_from_path
-from app import app, db
 from flask import (
     render_template,
     redirect,
@@ -52,6 +52,7 @@ list_endpoints = [
     "compressed_pdf",
     "resize_pdf",
     "compressed_files_pdf",
+    "phone_book",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -312,7 +313,12 @@ def compressed_files_pdf():
         )
 
     return render_template("compressed_files_pdf.html", form=form)
-    return render_template("edit_passwords.html", form_passwd=form_passwd, user=user)
+
+
+@app.route("/phone_book", methods=["GET", "POST"])
+@login_required
+def phone_book():
+    return render_template("phone_book.html")
 
 
 if __name__ == "__main__":
