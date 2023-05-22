@@ -32,7 +32,7 @@
             {% if request.path != url_for('edit_profile')  and ( not 'edit_passwords' in request.path) %}
                 <a href="{{ url_for('user', username=current_user.username) }}"><div class="icon icon-enter" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Страница профиля"><i class="fa fa-user"></i></div></a>
                 <a href="{{ url_for('logout') }}"><div class="icon icon-collapse" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Выйти"><i class="fa fa-sign-in"></i></div></a>
-                <a href="{{ url_for('its') }}"><div class="icon icon-rotate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Телефонный справочник"><i class="fa fa-phone"></i></div></a>
+                <a href="{{ url_for('phone_book') }}"><div class="icon icon-rotate" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Телефонный справочник"><i class="fa fa-phone"></i></div></a>
             {% endif %}
             {% if request.path == url_for('user', username=current_user.username) %}
             <a href="{{ url_for('edit_profile') }}"><div class="icon icon-enter" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Редактирование профиля"><i class="fa fa-bars"></i></div></a>
@@ -55,7 +55,7 @@
 {% block body %}
 
 {% endblock %}
-<img class="logo" src="../../static/media_files/jpg/logo_main.png" alt="footer">
+<img class="logo" src="{{ url_for('static', filename='media_files/jpg/logo_main.png') }}" alt="footer">
 
 </body>
 </html>

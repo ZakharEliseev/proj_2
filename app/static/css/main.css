@@ -14,19 +14,22 @@ body {
   font-family: 'BreeCYR-Light';
   line-height: 1;
 }
+
 .content {
   display: flex;
   align-items: center;
   /*  растянет максимально по высоте блок и прижмет футер*/
   flex: 1; 
 }
+
 .weather{
   margin-bottom: 4px;
-  padding: 1px 2em;
+  padding: 1px 1em;
 	border: 1px solid #6c370a;
 	background: #59291580;
   font-family: 'BreeCYR-Light';
 }
+
 #eventCalendar{
   top:2em;
   width: 335px;
@@ -41,6 +44,7 @@ body {
   margin-right: 5em;
   margin-left: 1em;
 }
+
 .menu_nav{
   display: flex;
   flex-direction: column;
@@ -49,6 +53,7 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
+
 .content__link {
   display: flex;
   flex-direction: column;
@@ -59,12 +64,14 @@ body {
   max-width: 96px;
   max-height: 120px;
 }
+
 .logo{
   position: absolute;
   bottom: 0;
   right: 0;
   width: 300px;
 }
+
 .title_content_links{
   display: flex;
   align-items: center;

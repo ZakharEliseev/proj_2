@@ -46,6 +46,26 @@ class UserPasswords(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
 
+class Toner(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    printers_name = db.Column(db.String(20), index=True, unique=True)
+    printers_toner = db.Column(db.String(20), index=True, unique=True)
+    created_at = db.Column(
+        db.DateTime, server_default=func.utcnow(), default=datetime.utcnow, index=True
+    )
+
+    def __repr__(self):
+        return f"<Toner {self.printers_name}>"
+
+
+class PhoneBooks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(120))
+    phone_number = db.Column(db.String(20))
+    position = db.Column(db.String(120))
+    organization = db.Column(db.String(120))
+
+
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
