@@ -4,7 +4,7 @@ from datetime import datetime
 from PyPDF2 import PdfReader, PdfWriter
 from pdf2image import convert_from_path
 from app import app, db
-from flask import render_template, redirect, url_for, flash, send_file, abort, request
+from flask import render_template, redirect, url_for, flash, send_file, abort, request, session, g
 from app.forms import (
     LoginForm,
     RegistrationForm,
@@ -51,12 +51,15 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+        session.permanent = True
+        g.user = current_user
 
 
 @app.route("/")
 @app.route("/index", endpoint="index")
 @login_required
 def main_index():
+    session.permanent = True
     return render_template("index.html")
 
 
@@ -199,10 +202,12 @@ def edit_passwords(user_id):
 def resize_tiff(image_file, percent):
     with Image.open(image_file) as img:
         width, height = img.size
+        # Делим ширину полученную из формы на 100
         new_width = int(width * (percent / 100))
+        # Делим высоту полученную из формы на 100
         new_height = int(height * (percent / 100))
         resized_img = img.resize((new_width, new_height))
-        buffer = BytesIO()
+        buffer = BytesIO()   # Сохраняем в память
         resized_img.save(buffer, format="TIFF")
         buffer.seek(0)
     return buffer
@@ -225,13 +230,13 @@ def compressed_files_tiff():
     return render_template("compressed_files_tiff.html", form=form)
 
 
-
 def compress_pdf(input_file, output_file, resolution):
     # Конвертируем PDF в изображения
     images = convert_from_path(input_file, dpi=resolution)
     # Создаем папку для временных изображений
     temp_dir = "temp_images"
-    os.makedirs(temp_dir, exist_ok=True)
+    if not os.path.exists(temp_dir):
+        os.makedirs(temp_dir, exist_ok=True)
 
     out_images = []
     for i, image in tqdm(enumerate(images), total=len(images), desc='Compressing images'):

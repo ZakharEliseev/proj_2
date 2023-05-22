@@ -4,6 +4,7 @@ html,body {
     padding: 0;
     font-family: 'BreeCYR-Light';
 }
+
 body {
     background: rgba(206, 154, 104, 0.671);
     display: grid;
@@ -20,6 +21,7 @@ body {
     left: 10px;
 
 }
+
 .services {
     background-color: #fff9e6;
     /* background-image: url(../static/jpg/texture-02.jpg); */
@@ -31,16 +33,19 @@ body {
     position: sticky;
     left: 20em;
 }
+
 .cell {
     box-shadow: inset 1px 1px 1px rgb(108, 55, 10);
     text-align: center;
 }
+
 .logo{
     position: fixed;
     bottom: 0;
     right: 0;
     width: 300px;
   }
+
   .content__link{
     text-align: center;
     font-size: 13px;
@@ -49,11 +54,13 @@ body {
     box-shadow: inset 1px 1px 1px rgb(108, 55, 10);
     text-align: center;
   }
+
 #img_links{
     padding-top: 7px;
     width: 86px;
     height: 86px;
 }
+
 /*.vidacha{*/
 /*    padding-top: 7px;*/
 /*    width:121px;*/

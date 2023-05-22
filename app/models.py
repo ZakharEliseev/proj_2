@@ -14,9 +14,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     date_of_birth = db.Column(db.String(140))
-    last_seen = db.Column(
-        db.DateTime, server_default=func.utcnow(), default=datetime.utcnow
-    )
+    last_seen = db.Column(db.DateTime, server_default=func.utcnow(), default=datetime.utcnow)
     phone_number = db.Column(db.String(128))
     position = db.Column(db.String(128))
     passwords = db.relationship("UserPasswords", backref="user_pswd", lazy="dynamic")
@@ -44,6 +42,16 @@ class UserPasswords(db.Model):
     password_home = db.Column(db.String(128))
     password_delo = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+
+class Toner(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    printers_name = db.Column(db.String(20), index=True, unique=True)
+    printers_toner = db.Column(db.String(20), index=True, unique=True)
+    created_at = db.Column(db.DateTime, server_default=func.utcnow(), default=datetime.utcnow, index=True)
+
+    def __repr__(self):
+        return f'<Toner {self.printers_name}>'
 
 
 @login.user_loader

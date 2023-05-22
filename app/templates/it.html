@@ -4,6 +4,7 @@
     {% endblock %}
 {% block head %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style_pages.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/it.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/media.css') }}">
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}">
@@ -72,51 +73,135 @@
 
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-mfcbrown-256.png" width="86" height="86">
+                <img id="img_links" src="../../static/media_files/png/ico-mfcbrown-256.png" width="86" height="86" alt="">
                 <br>
                 <span class="hidden">Портал МФЦ</span>
                 <br>
                 <span class="hidden">Главная страница</span>
             </a>
-
-            <a class="content__link" href="">
-
+            <a class="content__link" target="_blank" href="{{ url_for('compressed_files_tiff') }}">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/TIFF_29690.png')}}" alt="tiff" title="Сжатие tiff" />
+                <br>
+                <p class="name_content_link">Сжатие tiff</p>
             </a>
 
-            <a class="content__link" href="">
-
+            <a class="content__link" target="_blank" href="{{ url_for("compressed_files_pdf") }}">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/809693.png')}}" alt="pdf" title="Сжатие pdf" />
+                <br>
+                <p class="name_content_link">Сжатие pdf</p>
+            </a>
+            <a class="content__link" target="_blank" href="http://10.107.10.110/">
+                <span class="hidden">МФУ окно 1</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
             </a>
 
-
-            <a class="content__link" href="https://esia.gosuslugi.ru/profile/user/personal">
-
-            </a>
-
-
-            <a class="content__link" href="https://lk.gosuslugi.ru/settings/account">
-
-            </a>
-
-        <a class="content__link" href="https://fias.nalog.ru/">
-
-            </a>
-        <a class="content__link" href="https://fias.nalog.ru/">
-
-            </a>
-            <a class="content__link" href="#">
-
-            </a>
-
-            <a class="content__link" href="#">
-
-            </a>
-
-
-            <a class="content__link" href="https://mail.mfchmao.ru/">
-
+            <a class="content__link" target="_blank" href="http://10.107.10.111">
+                <span class="hidden">МФУ окно 2</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
             </a>
 
 
+            <a class="content__link" target="_blank" href="http://10.107.10.112/index.html">
+                <span class="hidden">МФУ окно 3</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
+            </a>
+
+
+         <a class="content__link" target="_blank" href="http://10.107.10.113/index.html">
+                <span class="hidden">МФУ окно 4</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
+        </a>
+
+        <a class="content__link" target="_blank" href="http://10.107.10.114/index.html">
+                <span class="hidden">МФУ окно 5</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
+        </a>
+        <a class="content__link" target="_blank" href="http://10.107.10.115/index.html">
+                <span class="hidden">МФУ окно 6</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
+        </a>
+
+
+        <a class="content__link" target="_blank" href="http://10.107.10.101/index.html">
+                <span class="hidden">МФУ Админы</span>
+                <br>
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+                <br>
+                <span class="hidden">Остаток тонера: </span>
+                <br>
+                <span class="hidden">Дата\Время запроса: </span>
+        </a>
+
+
+        <a class="content__link" target="_blank" href="http://10.107.10.104/index.html">
+            <span class="hidden">МФУ ИТ</span>
+            <br>
+            <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+            <br>
+            <span class="hidden">Остаток тонера: </span>
+            <br>
+            <span class="hidden">Дата\Время запроса: </span>
+        </a>
+
+
+        <a class="content__link" target="_blank" href="http://10.107.10.102">
+            <span class="hidden">МФУ Бэк 1</span>
+            <br>
+            <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+            <br>
+            <span class="hidden">Остаток тонера: </span>
+            <br>
+            <span class="hidden">Дата\Время запроса: </span>
+        </a>
+
+        <a class="content__link" target="_blank" href="http://10.107.10.120">
+            <span class="hidden">МФУ Бэк 2</span>
+            <br>
+            <img id="img_links" src="{{ url_for('static', filename='media_files/png/mfu.png') }}" alt="">
+            <br>
+            <span class="hidden">Остаток тонера: </span>
+            <br>
+            <span class="hidden">Дата\Время запроса: </span>
+        </a>
+
+
+        <a class="content__link" href="">
+
+        </a>
+
+        <a class="content__link" href="#">
+
+        </a>
         <a class="content__link" href="#">
 
         </a>
@@ -125,45 +210,13 @@
 
         </a>
 
-         <a class="content__link" href="#">
-
-         </a>
-
-
-        <a class="content__link" href="https://propfr.ru/check_snils.html">
-
-        </a>
-
-        <a class="content__link" href="#">
-
-        </a>
-
-
-        <a class="content__link" href="https://mail.mfchmao.ru/">
-
-        </a>
-
         <a class="content__link" href="#">
 
         </a>
         <a class="content__link" href="#">
 
         </a>
-
-        <a class="content__link" href="#">
-
-        </a>
-
-        <a class="content__link" href="#">
-
-        </a>
-        <a class="content__link" href="#">
-
-        </a>
-
-
     </section>
-
 {% endblock %}
 
 

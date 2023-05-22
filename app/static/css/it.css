@@ -1,0 +1,11 @@
+.services {
+    background-color: #fff9e6;
+    display: grid;
+    grid-template-columns: repeat(4, 156px) !important;
+    grid-auto-rows: auto !important;
+    border: 3px solid rgb(108, 55, 10);
+    border-radius: 12px;
+    position: sticky;
+    left: 20em;
+}
+

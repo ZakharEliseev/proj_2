@@ -36,9 +36,10 @@ def get_data_arm_2(url2):
 
 def get_data_arm_3_by_bs4(url3):
     options = webdriver.FirefoxOptions()
-    options.add_argument('-headless')
+    # options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
     try:
+        # driver.execute_script(f'window.open("{url3}");')
         driver.get(url3)
         elem = driver.find_element(By.ID,'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
@@ -49,6 +50,7 @@ def get_data_arm_3_by_bs4(url3):
     finally:
         driver.close()
         driver.quit()
+        ...
     return result.strip()
 
 
@@ -142,22 +144,22 @@ def get_data_arm_it_by_bs4(url8):
     return result.strip()
 
 
-def get_data_bak_1(url10):
+def get_data_bak_1(url9):
     options = webdriver.FirefoxOptions()
     options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
-    driver.get(url1)
+    driver.get(url9)
     elems = driver.find_elements(By.CLASS_NAME, 'style363')
     elem_list = [elem.text for elem in elems]
     driver.quit()
     return elem_list
 
 
-def get_data_bak_2(url9):
+def get_data_bak_2(url10):
     options = webdriver.FirefoxOptions()
     options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
-    driver.get(url1)
+    driver.get(url10)
     elems = driver.find_elements(By.CLASS_NAME, 'style363')
     elem_list = [elem.text for elem in elems]
     driver.quit()
@@ -174,7 +176,7 @@ def find_element_with_digits(data) -> str:
 
 @calculate_time
 def main():
-    print(arm1 := find_element_with_digits(get_data_arm_1(url1)))
+    # print(arm1 := find_element_with_digits(get_data_arm_1(url1)))
     # arm2 = find_element_with_digits(get_data_arm_2(url2))
     # arm3 = get_data_arm_3_by_bs4(url3)
     # arm4 = get_data_arm_4_by_bs4(url4)
@@ -182,11 +184,12 @@ def main():
     # arm6 = get_data_arm_6_by_bs4(url6)
     # arm7 = get_data_arm_6_by_bs4(url7)
     # arm8 = get_data_arm_6_by_bs4(url8)
-    # arm10 = find_element_with_digits(get_data_bak_1(url10))
-    # arm9 = find_element_with_digits(get_data_bak_2(url9))
+    arm9 = get_data_bak_1(bak1)
+    arm10 = find_element_with_digits(get_data_bak_2(bak2))
     # pp.pprint(f'Окно1 = {arm1}, Окно2 = {arm2}, Окно3 = {arm3}, Окно4 = {arm4}, Окно5 = {arm5}, '
     #           f'Окно6 = {arm6}, Админы = {arm7}, ИТ = {arm8}, Бэк1 = {arm9} Бэк2 = {arm10}')
-
+    pp.pp(arm10)
+    pp.pp(arm9)
 
 if __name__ == '__main__':
     main()
