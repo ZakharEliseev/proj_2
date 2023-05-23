@@ -49,14 +49,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for i in contacts %}
+                        {% for contact in contacts %}
                             <tr>
                                 <td>
-                                    <a href="#" class="text-body">{{ contacts.fio }}</a>
+                                    <a href="#" class="text-body">{{ contact.fio }}</a>
                                 </td>
-                                <td><span class="badge badge-soft-success mb-0">{{ contacts.position }}</span></td>
-                                <td>{{ contacts.phone_number }}</td>
-                                <td>{{ contacts.organization }}</td>
+                                <td><span class="badge badge-soft-success mb-0">{{ contact.position }}</span></td>
+                                <td>{{ contact.phone_number }}</td>
+                                <td>{{ contact.organization }}</td>
                                 <td>
                                     <ul class="list-inline mb-0">
                                         <li class="list-inline-item">
