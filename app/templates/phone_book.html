@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/phone_book_style.css') }}">
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">
 {% endblock %}
 {% block body %}
 
@@ -50,11 +51,11 @@
                                 <th scope="col" class="ps-4" style="width: 50px;">
                                     <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
                                 </th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Position</th>
+                                <th scope="col">ФИО</th>
+                                <th scope="col">Должность</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Projects</th>
-                                <th scope="col" style="width: 200px;">Action</th>
+                                <th scope="col">Организация</th>
+                                <th scope="col" style="width: 110px;">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -72,13 +73,7 @@
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
+                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Удалить" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                                         </li>
                                     </ul>
                                 </td>
@@ -104,12 +99,6 @@
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                                         </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -128,12 +117,6 @@
                                         </li>
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
                                         </li>
                                     </ul>
                                 </td>
@@ -159,10 +142,6 @@
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                                         </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Remove</a></div>
-                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -181,12 +160,6 @@
                                         </li>
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
                                         </li>
                                     </ul>
                                 </td>
@@ -207,12 +180,6 @@
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                                         </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -231,12 +198,6 @@
                                         </li>
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
                                         </li>
                                     </ul>
                                 </td>
@@ -257,12 +218,6 @@
                                         <li class="list-inline-item">
                                             <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                                         </li>
-                                        <li class="list-inline-item dropdown">
-                                            <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another action</a><a class="dropdown-item" href="#">Something else here</a>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </td>
                             </tr>
@@ -274,7 +229,6 @@
     </div>
     <div class="row g-0 align-items-center pb-4">
         <div class="col-sm-6">
-            <div><p class="mb-sm-0">Showing 1 to 10 of 57 entries</p></div>
         </div>
         <div class="col-sm-6">
             <div class="float-sm-end">
