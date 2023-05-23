@@ -10,8 +10,6 @@ from flask import (
     url_for,
     flash,
     send_file,
-    abort,
-    request,
     session,
     g,
 )
@@ -22,9 +20,10 @@ from app.forms import (
     EditProfilePasswd,
     UploadFormTIFF,
     UploadFormPDF,
+    PhoneBookForm
 )
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, UserPasswords
+from app.models import User, UserPasswords, PhoneBook
 from flask import request
 from urllib.parse import urlsplit
 from io import BytesIO
@@ -318,7 +317,20 @@ def compressed_files_pdf():
 @app.route("/phone_book", methods=["GET", "POST"])
 @login_required
 def phone_book():
-    return render_template("phone_book.html")
+    contacts = PhoneBook.query.all()
+    form = PhoneBookForm()
+    if form.validate_on_submit():
+        contact = PhoneBook(
+            fio=form.fio.data,
+            position=form.position.data,
+            phone=form.phone.data,
+            organization=form.organization.data
+        )
+        db.session.add(contact)
+        db.session.commit()
+        flash('Контакт успешно добавлен.', 'success')
+        return redirect(url_for('phone_book.html'))
+    return render_template("phone_book.html", contacts=contacts, form=form)
 
 
 if __name__ == "__main__":

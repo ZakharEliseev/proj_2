@@ -162,6 +162,7 @@ cython_debug/
 *.png
 *.jpg
 png/
+logs/
 jpg/
 *.ico
 *.db

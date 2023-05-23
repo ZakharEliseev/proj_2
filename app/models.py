@@ -58,14 +58,18 @@ class Toner(db.Model):
         return f"<Toner {self.printers_name}>"
 
 
-class PhoneBooks(db.Model):
+class PhoneBook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(120))
-    phone_number = db.Column(db.String(20))
+    fio = db.Column(db.String(120))
     position = db.Column(db.String(120))
+    phone_number = db.Column(db.String(20))
     organization = db.Column(db.String(120))
+
+    def __repr__(self):
+        return f'<Contact {self.fio}>'
 
 
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+

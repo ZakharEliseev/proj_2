@@ -1,12 +1,9 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired
 from wtforms import (
-    StringField,
     PasswordField,
     BooleanField,
-    SubmitField,
     StringField,
-    TextAreaField,
     SubmitField,
     DateField,
     FileField,
@@ -87,14 +84,18 @@ class EditProfile(FlaskForm):
 
 
 class EditProfilePasswd(FlaskForm):
-    password_ais = StringField("Пароль АИС", validators=[Length(min=6, max=20)])
-    password_pvd = StringField("Пароль ПВД", validators=[Length(min=6, max=20)])
-    password_enter = StringField("Пароль СУО", validators=[Length(min=6, max=20)])
-    password_mail = StringField("Пароль почта", validators=[Length(min=6, max=20)])
+    password_ais = StringField("Пароль АИС",
+                               validators=[Length(min=6, max=20)])
+    password_pvd = StringField("Пароль ПВД",
+                               validators=[Length(min=6, max=20)])
+    password_enter = StringField("Пароль СУО",
+                                 validators=[Length(min=6, max=20)])
+    password_mail = StringField("Пароль почта",
+                                validators=[Length(min=6, max=20)])
     password_home = StringField(
-        "Пароль от этого сайта", validators=[Length(min=6, max=20)]
-    )
-    password_delo = StringField("Пароль СЭД", validators=[Length(min=6, max=20)])
+        "Пароль от этого сайта", validators=[Length(min=6, max=20)])
+    password_delo = StringField("Пароль СЭД",
+                                validators=[Length(min=6, max=20)])
     submit = SubmitField("Обновить пароли!")
 
 
@@ -116,3 +117,11 @@ class UploadFormPDF(FlaskForm):
         validators=[DataRequired(), NumberRange(min=100, max=300)],
     )
     submit = SubmitField("Загрузить для сжатия")
+
+
+class PhoneBookForm(FlaskForm):
+    fio = StringField('ФИО', validators=[DataRequired()])
+    position = StringField('Должность')
+    phone = StringField('Телефон', validators=[DataRequired()])
+    organization = StringField('Организация', validators=[DataRequired()])
+    submit = SubmitField('Сохранить')
