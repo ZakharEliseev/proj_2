@@ -122,6 +122,6 @@ class UploadFormPDF(FlaskForm):
 class PhoneBookForm(FlaskForm):
     fio = StringField('ФИО', validators=[DataRequired()])
     position = StringField('Должность')
-    phone = StringField('Телефон', validators=[DataRequired()])
+    phone_number = StringField('Телефон', validators=[DataRequired()])
     organization = StringField('Организация', validators=[DataRequired()])
     submit = SubmitField('Сохранить')

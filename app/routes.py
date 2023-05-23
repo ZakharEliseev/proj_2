@@ -52,6 +52,7 @@ list_endpoints = [
     "resize_pdf",
     "compressed_files_pdf",
     "phone_book",
+    "phone_book_add",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -281,8 +282,8 @@ def compressed_files_pdf():
     form = UploadFormPDF()
     if request.method == "POST" and form.validate_on_submit():
         pdf_file = form.file.data
-        # reduction_percentage = form.reduction.data
-        resolution = form.resolution.data  # Установите желаемое разрешение здесь
+        # Установите желаемое разрешение здесь
+        resolution = form.resolution.data
 
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], pdf_file.filename)
         pdf_file.save(file_path)
@@ -318,19 +319,24 @@ def compressed_files_pdf():
 @login_required
 def phone_book():
     contacts = PhoneBook.query.all()
+    return render_template("phone_book.html", contacts=contacts)
+
+
+@app.route("/phone_book/add", methods=["GET", "POST"])
+@login_required
+def phone_book_add():
     form = PhoneBookForm()
     if form.validate_on_submit():
         contact = PhoneBook(
             fio=form.fio.data,
             position=form.position.data,
-            phone=form.phone.data,
-            organization=form.organization.data
+            phone_number=form.phone_number.data,
+            organization=form.organization.data,
         )
         db.session.add(contact)
         db.session.commit()
-        flash('Контакт успешно добавлен.', 'success')
-        return redirect(url_for('phone_book.html'))
-    return render_template("phone_book.html", contacts=contacts, form=form)
+        return redirect(url_for('phone_book'))
+    return render_template("phone_book_add.html", form=form)
 
 
 if __name__ == "__main__":

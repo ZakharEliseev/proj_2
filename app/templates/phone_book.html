@@ -29,15 +29,8 @@
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
 
                 <div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-danger"><i class="bx bx-plus me-1"></i>Добавить новый</a>
+                    <a href="{{ url_for('phone_book_add') }}" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-danger"><i class="bx bx-plus me-1"></i>Добавить новый</a>
                 </div>
-                <div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-danger"><i class="bx bx-edit me-1"></i>Изменение выбранного</a>
-                </div>
-                <div>
-                    <a href="#" data-bs-toggle="modal" data-bs-target=".add-new" class="btn btn-danger"><i class="bx bx-minus me-1"></i>Удаление выбранного</a>
-                </div>
-
             </div>
         </div>
     </div>
@@ -48,179 +41,183 @@
                     <table class="table project-list-table table-nowrap align-middle table-borderless">
                         <thead>
                             <tr>
-                                <th scope="col" class="ps-4" style="width: 50px;">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck" /><label class="form-check-label" for="contacusercheck"></label></div>
-                                </th>
                                 <th scope="col">ФИО</th>
                                 <th scope="col">Должность</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Организация</th>
-                                <th scope="col" style="width: 110px;">Action</th>
+                                <th scope="col" style="width: 110px;">Действия с контактом</th>
                             </tr>
                         </thead>
                         <tbody>
+                        {% for i in contacts %}
                             <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck1" /><label class="form-check-label" for="contacusercheck1"></label></div>
-                                </th>
-                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Simon Ryles</a></td>
-                                <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
-                                <td>SimonRyles@minible.com</td>
-                                <td>125</td>
+                                <td>
+                                    <a href="#" class="text-body">{{ contacts.fio }}</a>
+                                </td>
+                                <td><span class="badge badge-soft-success mb-0">{{ contacts.position }}</span></td>
+                                <td>{{ contacts.phone_number }}</td>
+                                <td>{{ contacts.organization }}</td>
                                 <td>
                                     <ul class="list-inline mb-0">
                                         <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                         </li>
                                         <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Удалить" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
+                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top"
+                                               title="Удалить" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
+                            {% else %}
                             <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck3" /><label class="form-check-label" for="contacusercheck3"></label></div>
-                                </th>
-                                <td>
-                                    <div class="avatar-sm d-inline-block me-2">
-                                        <div class="avatar-title bg-soft-primary rounded-circle text-primary"><i class="mdi mdi-account-circle m-0"></i></div>
-                                    </div>
-                                    <a href="#" class="text-body">Frederick White</a>
-                                </td>
-                                <td><span class="badge badge-soft-danger mb-0">UI/UX Designer</span></td>
-                                <td>FrederickWhite@minible.com</td>
-                                <td>112</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
+                                <td colspan="5" class="text-center">No contacts found.</td>
                             </tr>
-                            <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck4" /><label class="form-check-label" for="contacusercheck4"></label></div>
-                                </th>
-                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Shanon Marvin</a></td>
-                                <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td>
-                                <td>ShanonMarvin@minible.com</td>
-                                <td>121</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck5" /><label class="form-check-label" for="contacusercheck5"></label></div>
-                                </th>
-                                <td>
-                                    <div class="avatar-sm d-inline-block me-2">
-                                        <div class="avatar-title bg-soft-primary rounded-circle text-primary"><i class="mdi mdi-account-circle m-0"></i></div>
-                                    </div>
-                                    <a href="#" class="text-body">Mark Jones</a>
-                                </td>
-                                <td><span class="badge badge-soft-info mb-0">Frontend Developer</span></td>
-                                <td>MarkJones@minible.com</td>
-                                <td>145</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck6" /><label class="form-check-label" for="contacusercheck6"></label></div>
-                                </th>
-                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Janice Morgan</a></td>
-                                <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td>
-                                <td>JaniceMorgan@minible.com</td>
-                                <td>136</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck7" /><label class="form-check-label" for="contacusercheck7"></label></div>
-                                </th>
-                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Patrick Petty</a></td>
-                                <td><span class="badge badge-soft-danger mb-0">UI/UX Designer</span></td>
-                                <td>PatrickPetty@minible.com</td>
-                                <td>125</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck8" /><label class="form-check-label" for="contacusercheck8"></label></div>
-                                </th>
-                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Marilyn Horton</a></td>
-                                <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td>
-                                <td>MarilynHorton@minible.com</td>
-                                <td>154</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="ps-4">
-                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck9" /><label class="form-check-label" for="contacusercheck9"></label></div>
-                                </th>
-                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Neal Womack</a></td>
-                                <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>
-                                <td>NealWomack@minible.com</td>
-                                <td>231</td>
-                                <td>
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            {% endfor %}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck3" /><label class="form-check-label" for="contacusercheck3"></label></div>#}
+{#                                </th>#}
+{#                                <td>#}
+{#                                    <div class="avatar-sm d-inline-block me-2">#}
+{#                                        <div class="avatar-title bg-soft-primary rounded-circle text-primary"><i class="mdi mdi-account-circle m-0"></i></div>#}
+{#                                    </div>#}
+{#                                    <a href="#" class="text-body">Frederick White</a>#}
+{#                                </td>#}
+{#                                <td><span class="badge badge-soft-danger mb-0">UI/UX Designer</span></td>#}
+{#                                <td>FrederickWhite@minible.com</td>#}
+{#                                <td>112</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck4" /><label class="form-check-label" for="contacusercheck4"></label></div>#}
+{#                                </th>#}
+{#                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Shanon Marvin</a></td>#}
+{#                                <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td>#}
+{#                                <td>ShanonMarvin@minible.com</td>#}
+{#                                <td>121</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck5" /><label class="form-check-label" for="contacusercheck5"></label></div>#}
+{#                                </th>#}
+{#                                <td>#}
+{#                                    <div class="avatar-sm d-inline-block me-2">#}
+{#                                        <div class="avatar-title bg-soft-primary rounded-circle text-primary"><i class="mdi mdi-account-circle m-0"></i></div>#}
+{#                                    </div>#}
+{#                                    <a href="#" class="text-body">Mark Jones</a>#}
+{#                                </td>#}
+{#                                <td><span class="badge badge-soft-info mb-0">Frontend Developer</span></td>#}
+{#                                <td>MarkJones@minible.com</td>#}
+{#                                <td>145</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck6" /><label class="form-check-label" for="contacusercheck6"></label></div>#}
+{#                                </th>#}
+{#                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Janice Morgan</a></td>#}
+{#                                <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td>#}
+{#                                <td>JaniceMorgan@minible.com</td>#}
+{#                                <td>136</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck7" /><label class="form-check-label" for="contacusercheck7"></label></div>#}
+{#                                </th>#}
+{#                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Patrick Petty</a></td>#}
+{#                                <td><span class="badge badge-soft-danger mb-0">UI/UX Designer</span></td>#}
+{#                                <td>PatrickPetty@minible.com</td>#}
+{#                                <td>125</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck8" /><label class="form-check-label" for="contacusercheck8"></label></div>#}
+{#                                </th>#}
+{#                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Marilyn Horton</a></td>#}
+{#                                <td><span class="badge badge-soft-primary mb-0">Backend Developer</span></td>#}
+{#                                <td>MarilynHorton@minible.com</td>#}
+{#                                <td>154</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <th scope="row" class="ps-4">#}
+{#                                    <div class="form-check font-size-16"><input type="checkbox" class="form-check-input" id="contacusercheck9" /><label class="form-check-label" for="contacusercheck9"></label></div>#}
+{#                                </th>#}
+{#                                <td><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="avatar-sm rounded-circle me-2" /><a href="#" class="text-body">Neal Womack</a></td>#}
+{#                                <td><span class="badge badge-soft-success mb-0">Full Stack Developer</span></td>#}
+{#                                <td>NealWomack@minible.com</td>#}
+{#                                <td>231</td>#}
+{#                                <td>#}
+{#                                    <ul class="list-inline mb-0">#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                        <li class="list-inline-item">#}
+{#                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>#}
+{#                                        </li>#}
+{#                                    </ul>#}
+{#                                </td>#}
+{#                            </tr>#}
                         </tbody>
                     </table>
                 </div>
