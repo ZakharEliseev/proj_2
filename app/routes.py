@@ -53,6 +53,7 @@ list_endpoints = [
     "compressed_files_pdf",
     "phone_book",
     "phone_book_add",
+    "phone_book_delete",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -337,6 +338,15 @@ def phone_book_add():
         db.session.commit()
         return redirect(url_for('phone_book'))
     return render_template("phone_book_add.html", form=form)
+
+
+@app.route('/phone_book/delete/<int:id>', methods=["GET", "POST"])
+def phone_book_delete(id):
+    contact = PhoneBook.query.get(id)
+    db.session.delete(contact)
+    db.session.commit()
+    flash('Контакт удален', 'success')
+    return redirect(url_for('phone_book'))
 
 
 if __name__ == "__main__":

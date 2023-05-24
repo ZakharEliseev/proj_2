@@ -82,5 +82,6 @@ body {
 .current_user{
   position: absolute;
   left: 20px;
+  top: -1px;
 }
 
