@@ -54,6 +54,8 @@ list_endpoints = [
     "phone_book",
     "phone_book_add",
     "phone_book_delete",
+    "phone_book_edit",
+    "phone_book_search",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -348,6 +350,42 @@ def phone_book_delete(id):
     db.session.commit()
     flash('Контакт удален', 'success')
     return redirect(url_for('phone_book'))
+
+
+# @app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
+# def phone_book_edit(id):
+#     contact = PhoneBook.query.get(id)
+#     form = PhoneBookForm(obj=contact)
+#     if form.validate_on_submit():
+#         form.populate_obj(contact)
+#         db.session.commit()
+#         return redirect(url_for('phone_book'))
+#     return render_template('phone_book_edit.html', form=form)
+@app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
+def phone_book_edit(id):
+    contact = PhoneBook.query.get(id)
+    form = PhoneBookForm()
+    if form.validate_on_submit():
+        contact.fio = form.fio.data
+        contact.position = form.position.data
+        contact.phone_number = form.phone_number.data
+        contact.organization = form.organization.data
+        db.session.commit()
+        return redirect(url_for('phone_book'))
+    elif request.method == 'GET':
+        form.fio.data = contact.fio
+        form.position.data = contact.position
+        form.phone_number.data = contact.phone_number
+        form.organization.data = contact.organization
+    return render_template('phone_book_edit.html', form=form)
+
+
+@app.route('/phone_book/search/<fio>/<organization>', methods=['GET', 'POST'])
+def phone_book_search(fio, organization):
+    search_contact = PhoneBook.query.filter_by(fio=fio, organization=organization).first_or_404()
+    return render_template('phone_book.html', search_contact=search_contact)
+
+
 
 
 if __name__ == "__main__":

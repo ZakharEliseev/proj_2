@@ -12,6 +12,7 @@
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'><!-- хз -->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
+        <script src="https://unpkg.com/imask"></script>
 {% endblock %}
 
 {% block body %}
@@ -34,7 +35,7 @@
                             {% endfor %}
                         </div>
                         <div class="form-outline mb-4">
-                            {{ form.phone_number(type="phone", id="typeEmailX-2", class="form-control form-control-lg") }}<br>
+                            {{ form.phone_number(type="phone", id="typeEmailX-2", class="phone_mask form-control form-control-lg") }}<br>
                             {{ form.phone_number.label(class="form-label", for="typeEmailX-2")}}
                             {% for error in form.phone_number.errors %}
                             <span style="color: red;">[{{ error }}]</span>
@@ -59,4 +60,12 @@
     </div>
   </div>
 </section>
+        <script>
+            const element = document.querySelector('.phone_mask');
+        const maskOptions = {
+          mask: '+{7}(000) 000-00-00'
+        };
+        const mask = IMask(element, maskOptions);
+    </script>
+
 {% endblock %}
