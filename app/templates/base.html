@@ -11,8 +11,8 @@
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/media_home.css') }}"><!-- медиа запросы-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" > <!-- хз -->
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'><!-- хз -->
+    <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- хз -->
+    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'><!-- хз -->
     <script async src="https://static1.meteolabs.ru/widgetjs/?id=id292b0ba1f27c1"></script> <!-- скрипт для погоды-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/font.css') }}"> <!-- стили для календаря-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar_theme_responsive.css') }}"> <!-- стили для календаря-->
