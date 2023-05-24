@@ -1,3 +1,5 @@
+from sqlalchemy import or_
+
 from app import app, db
 from tqdm import tqdm
 import os
@@ -20,7 +22,7 @@ from app.forms import (
     EditProfilePasswd,
     UploadFormTIFF,
     UploadFormPDF,
-    PhoneBookForm
+    PhoneBookForm, SearchPhoneBookForm
 )
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, UserPasswords, PhoneBook
@@ -55,7 +57,6 @@ list_endpoints = [
     "phone_book_add",
     "phone_book_delete",
     "phone_book_edit",
-    "phone_book_search",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -321,9 +322,15 @@ def compressed_files_pdf():
 @app.route("/phone_book", methods=["GET", "POST"])
 @login_required
 def phone_book():
-    contacts = PhoneBook.query.all()
+    search_form = SearchPhoneBookForm()
+    if search_form.validate_on_submit():
+        search_value = search_form.search_field.data
+        contacts = PhoneBook.query.filter((PhoneBook.fio.ilike(f'%{search_value}%') |
+                                           PhoneBook.organization.ilike(f'%{search_value}%'))).all()
+    else:
+        contacts = PhoneBook.query.all()
     count = len(contacts)
-    return render_template("phone_book.html", contacts=contacts, count=count)
+    return render_template('phone_book.html', contacts=contacts, count=count, search_form=search_form)
 
 
 @app.route("/phone_book/add", methods=["GET", "POST"])
@@ -352,15 +359,7 @@ def phone_book_delete(id):
     return redirect(url_for('phone_book'))
 
 
-# @app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
-# def phone_book_edit(id):
-#     contact = PhoneBook.query.get(id)
-#     form = PhoneBookForm(obj=contact)
-#     if form.validate_on_submit():
-#         form.populate_obj(contact)
-#         db.session.commit()
-#         return redirect(url_for('phone_book'))
-#     return render_template('phone_book_edit.html', form=form)
+
 @app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
 def phone_book_edit(id):
     contact = PhoneBook.query.get(id)
@@ -380,13 +379,14 @@ def phone_book_edit(id):
     return render_template('phone_book_edit.html', form=form)
 
 
-@app.route('/phone_book/search/<fio>/<organization>', methods=['GET', 'POST'])
-def phone_book_search(fio, organization):
-    search_contact = PhoneBook.query.filter_by(fio=fio, organization=organization).first_or_404()
-    return render_template('phone_book.html', search_contact=search_contact)
-
-
-
-
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
+# @app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
+# def phone_book_edit(id):
+#     contact = PhoneBook.query.get(id)
+#     form = PhoneBookForm(obj=contact)
+#     if form.validate_on_submit():
+#         form.populate_obj(contact)
+#         db.session.commit()
+#         return redirect(url_for('phone_book'))
+#     return render_template('phone_book_edit.html', form=form)

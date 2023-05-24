@@ -125,3 +125,8 @@ class PhoneBookForm(FlaskForm):
     phone_number = StringField('Телефон', validators=[DataRequired()])
     organization = StringField('Организация', validators=[DataRequired()])
     submit = SubmitField('Сохранить')
+
+
+class SearchPhoneBookForm(FlaskForm):
+    search_field = StringField('Поиск')
+    submit = SubmitField('Найти')

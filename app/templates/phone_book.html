@@ -25,8 +25,6 @@
                 <h5 class="card-title">Всего контактов: <span class="text-muted fw-normal ms-2">{{ count }}</span></h5>
             </div>
         </div>
-        {{ search_contact.fio }}
-        {{ search_contact.organization }}
         <div class="col-md-6">
             <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
 
@@ -39,6 +37,13 @@
 
     <div class="row">
         <div class="col-lg-12">
+                <form method="POST" action="{{ url_for('phone_book') }}" class="mb-3">
+                    {{ search_form.hidden_tag() }}
+                    <div class="input-group">
+                        {{ search_form.search_field(class='form-control', placeholder='Поиск') }}
+                        <button type="submit" class="btn btn-danger">Найти</button>
+                    </div>
+                </form>
             <div class="">
                 <div class="table-responsive">
                     <table class="table project-list-table table-nowrap align-middle table-borderless">
@@ -86,27 +91,6 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row g-0 align-items-center pb-4">
-        <div class="col-sm-6">
-        </div>
-        <div class="col-sm-6">
-            <div class="float-sm-end">
-                <ul class="pagination mb-sm-0">
-                    <li class="page-item disabled">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                    </li>
-                    <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">4</a></li>
-                    <li class="page-item"><a href="#" class="page-link">5</a></li>
-                    <li class="page-item">
-                        <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
