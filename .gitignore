@@ -166,5 +166,5 @@ logs/
 jpg/
 *.ico
 *.db
-app.db
+app_backup.db
 migrations/

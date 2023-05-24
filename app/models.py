@@ -17,8 +17,8 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(
         db.DateTime, server_default=func.utcnow(), default=datetime.utcnow
     )
-    phone_number = db.Column(db.String(128))
-    position = db.Column(db.String(128))
+    phone_number = db.Column(db.String(128), index=True)
+    position = db.Column(db.String(128), index=True)
     passwords = db.relationship("UserPasswords", backref="user_pswd", lazy="dynamic")
 
     def set_password(self, password):
@@ -37,12 +37,12 @@ class User(UserMixin, db.Model):
 
 class UserPasswords(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    password_ais = db.Column(db.String(128))
-    password_pvd = db.Column(db.String(128))
-    password_enter = db.Column(db.String(128))
-    password_mail = db.Column(db.String(128))
-    password_home = db.Column(db.String(128))
-    password_delo = db.Column(db.String(128))
+    password_ais = db.Column(db.String(128), index=True)
+    password_pvd = db.Column(db.String(128), index=True)
+    password_enter = db.Column(db.String(128), index=True)
+    password_mail = db.Column(db.String(128), index=True)
+    password_home = db.Column(db.String(128), index=True)
+    password_delo = db.Column(db.String(128), index=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
 
@@ -60,10 +60,16 @@ class Toner(db.Model):
 
 class PhoneBook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fio = db.Column(db.String(120))
-    position = db.Column(db.String(120))
-    phone_number = db.Column(db.String(20))
-    organization = db.Column(db.String(120))
+    fio = db.Column(db.String(120), index=True, nullable=False)
+    position = db.Column(db.String(120), index=True, default='Не заполнено')
+    phone_number = db.Column(db.String(20), index=True, nullable=False, unique=True)
+    organization = db.Column(db.String(120), index=True, default='Не заполнено')
+
+    def __init__(self, fio, phone_number, position, organization):
+        self.fio = fio
+        self.position = position if position else 'Не заполнено'
+        self.phone_number = phone_number
+        self.organization = organization if organization else 'Не заполнено'
 
     def __repr__(self):
         return f'<Contact {self.fio}>'

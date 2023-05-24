@@ -41,15 +41,8 @@ class RegistrationForm(FlaskForm):
         "Повторите пароль", validators=[DataRequired(), EqualTo("password")]
     )
     phone_number = StringField(
-        "Телефон",
-        validators=[
-            DataRequired(),
-            Length(min=10, max=12, message="Телефон должен быть от 10 до 12 символов"),
-        ],
-    )
-    date_of_birth = DateField(
-        "Дата рождения", validators=[DataRequired()], format="%d.%m.%Y"
-    )
+        "Телефон", validators=[DataRequired(),],)
+    date_of_birth = DateField("Дата рождения", validators=[DataRequired()], format="%d.%m.%Y")
     position = StringField("Должность", validators=[DataRequired()])
     submit = SubmitField("Регистрация")
 
@@ -123,7 +116,7 @@ class PhoneBookForm(FlaskForm):
     fio = StringField('ФИО', validators=[DataRequired()])
     position = StringField('Должность')
     phone_number = StringField('Телефон', validators=[DataRequired()])
-    organization = StringField('Организация', validators=[DataRequired()])
+    organization = StringField('Организация')
     submit = SubmitField('Сохранить')
 
 
