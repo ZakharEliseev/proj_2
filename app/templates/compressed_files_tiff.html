@@ -7,8 +7,8 @@
     <title>Загрузка файлов</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" ><!-- хз -->
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'><!-- хз -->
+    <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- хз -->
+    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'><!-- хз --> хз -->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/uploads.css') }}"> <!-- стили кнопок-->

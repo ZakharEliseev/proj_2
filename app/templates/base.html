@@ -6,17 +6,17 @@
 </title>
 <head>
     {% block head %}
+    <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- хз -->
+    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'><!-- хз -->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">  <!-- фавиконка -->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/media_home.css') }}"><!-- медиа запросы-->
-    <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- хз -->
-    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'><!-- хз -->
     <script async src="https://static1.meteolabs.ru/widgetjs/?id=id292b0ba1f27c1"></script> <!-- скрипт для погоды-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/font.css') }}"> <!-- стили для календаря-->
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar_theme_responsive.css') }}"> <!-- стили для календаря-->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar.css') }}"><title></title><!-- стили для календаря-->
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/calendar/eventCalendar.css') }}"><!-- стили для календаря-->
 {% endblock %}
 </head>
 {% if current_user.is_authenticated %}
@@ -55,7 +55,7 @@
 {% block body %}
 
 {% endblock %}
-<img class="logo" src="../../static/media_files/jpg/logo_main.png" alt="footer">
+<img class="logo" src="{{ url_for('static', filename='media_files/jpg/logo_main.png') }}" alt="footer">
 
 </body>
 </html>

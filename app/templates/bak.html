@@ -7,8 +7,8 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/media.css') }}">
     <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet" > <!-- хз -->
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+    <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- хз -->
+    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'><!-- хз -->
 {% endblock %}
 {% block body %}
     <section class="menu">
