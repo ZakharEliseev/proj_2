@@ -320,7 +320,8 @@ def compressed_files_pdf():
 @login_required
 def phone_book():
     contacts = PhoneBook.query.all()
-    return render_template("phone_book.html", contacts=contacts)
+    count = len(contacts)
+    return render_template("phone_book.html", contacts=contacts, count=count)
 
 
 @app.route("/phone_book/add", methods=["GET", "POST"])

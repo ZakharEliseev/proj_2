@@ -22,7 +22,7 @@
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Список контактов <span class="text-muted fw-normal ms-2">(834)</span></h5>
+                <h5 class="card-title">Всего контактов: <span class="text-muted fw-normal ms-2">{{ count }}</span></h5>
             </div>
         </div>
         <div class="col-md-6">
@@ -65,7 +65,7 @@
                                                title="Изменить" class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
                                         </li>
                                         <li class="list-inline-item">
-                                          <a href="{{ url_for('phone_book_delete', id=contact.id) }}" onclick="return showConfirm();"
+                                          <a href="{{ url_for('phone_book_delete', id=contact.id) }}" onclick="return confirm('Вы уверены, что хотите удалить контакт?');"
                                              data-bs-toggle="tooltip" data-bs-placement="top" title="Удалить" class="px-2 text-danger">
                                               <i class="bx bx-trash-alt font-size-18"></i>
                                           </a>
@@ -108,14 +108,4 @@
         </div>
     </div>
 </div>
-<script>
-function showConfirm() {
-    const result = confirm("Вы уверены, что хотите удалить контакт?");
-    if (result === true) {
-        return true;
-    } else {
-        return false;
-    }
-}
-</script>
 {% endblock %}
