@@ -25,12 +25,12 @@
 
 
             <a href="{{ url_for('baks') }}">
-                <img class="img_menu" src="../../static/media_files/png/nav/nav-03-3.png" alt="bak" title="Бэк офис" />
+                <img class="img_menu" src="{{url_for('static', filename='media_files/png/nav/nav-03-3.png')}}" alt="bak" title="Бэк офис" />
           </a>
 
 
             <a href="{{url_for('its')}}" target="">
-                <img class="img_menu" src="../../static/media_files/png/nav/nav-05.png" alt="it" title="Инженеры" />
+                <img class="img_menu" src="{{ url_for('static', filename='media_files/png/nav/nav-05.png') }}" alt="it" title="Инженеры" />
             </a>
 
 
@@ -46,7 +46,7 @@
     <section class="services">
 
             <a class="content__link" href="http://192.168.200.171/mfc/">
-                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ais.png') }}" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ais.png') }}" width="86" height="86" alt="">
                 <br>
                 <span class="hidden"> АИС МФЦ</span>
                 <br>
@@ -62,7 +62,7 @@
             </a>
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-rosreestr-PKPVD-256.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-rosreestr-PKPVD-256.png') }}" width="86" height="86" alt="">
                 <br>
                 <span class="hidden" >ПК ПВД</span>
                 <br>
@@ -71,7 +71,7 @@
 
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-mfcbrown-256.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-mfcbrown-256.png') }}" width="86" height="86" alt="">
                 <br>
                 <span class="hidden">Портал МФЦ</span>
                 <br>
@@ -79,7 +79,7 @@
             </a>
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-gosuslugi-2-256.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-gosuslugi-2-256.png') }}" width="86" height="86" alt="">
                 <br>
                 <span class="hidden">ГосУслуги</span>
                 <br>
@@ -87,7 +87,7 @@
             </a>
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-gosuslugi-covid-256.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-gosuslugi-covid-256.png') }}" width="86" height="86" alt="">
                 <br>
                 <span class="hidden">ГосУслуги</span>
                 <br>
@@ -113,14 +113,14 @@
             </a>
 
         <a class="content__link" href="https://fias.nalog.ru/">
-                <img id="img_links" src="../../static/media_files/png/fadn.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/fadn.png') }}" width="86" height="86">
                 <br>
                 <span class="hidden">ФАДН</span>
                 <br>
                 <span class="hidden">КМНС</span>
             </a>
         <a class="content__link" href="https://fias.nalog.ru/">
-                <img id="img_links" src="../../static/media_files/png/fias.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/fias.png') }}" width="86" height="86">
                 <br>
                 <span class="hidden">ФИАС</span>
                 <br>
@@ -141,10 +141,6 @@
                     <br>
                     <span class="hidden">ЭЦП</span>
             </a>
-
-
-
-
 
             <a class="content__link" href="https://mail.mfchmao.ru/">
                 <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-mail-zimbra2-256.png') }}" width="86" height="86">

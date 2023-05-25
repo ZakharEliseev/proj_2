@@ -19,7 +19,7 @@
     <div class="row align-items-center">
         <div class="col-md-6">
             <div class="mb-3">
-                <h5 class="card-title">Всего контактов: <span class="text-muted fw-normal ms-2">{{ count }}</span></h5>
+                <h5 class="card-title">Контактов найдено: <span class="text-muted fw-normal ms-2">{{ count }}</span></h5>
             </div>
         </div>
         <div class="col-md-6">
@@ -54,7 +54,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {% for contact in contacts %}
+                        {% for contact in pages.items %}
                             <tr>
                                 <td>
                                     <a href="#" class="text-body">{{ contact.fio }}</a>
@@ -90,5 +90,33 @@
             </div>
         </div>
     </div>
+ <div class="row g-0 align-items-center pb-4">
+        <div class="col-sm-6">
+            <div><p class="mb-sm-0">Показано от 1 до 10 из {{ count_contacts }} контактов</p></div>
+        </div>
+
+     <!-- пагинация -->
+        <div class="col-sm-6">
+            <div class="float-sm-end">
+                <ul class="pagination mb-sm-0">
+                    <li {% if not pages.has_prev %} class="page-item disabled" {% endif %}>
+                        <a href="phone_book?page={{ pages.prev_num }}" class="page-link">&laquo;</a>
+                    </li>
+
+                {% for page in pages.iter_pages() %}
+                    <li {% if page == pages.page %} class="page-item active "  {% endif %} >
+                        <a href="phone_book?page={{ page }}" class="page-link">{{ page }}</a>
+                    </li>
+                {% endfor %}
+
+                    <li {% if not pages.has_next %} class="page-item disabled" {% endif %}>
+                        <a href="phone_book?page={{ pages.next_num }}" class="page-link">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 {% endblock %}

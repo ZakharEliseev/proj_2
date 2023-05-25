@@ -31,12 +31,12 @@
 
 
           <a href="{{ url_for('baks') }}">
-            <img class="img_menu" src="../../static/media_files/png/nav/nav-03-3.png" alt="bak" title="Бэк офис" />
+            <img class="img_menu" src="{{ url_for('static', filename='media_files/png/nav/nav-03-3.png') }}" alt="bak" title="Бэк офис" />
             </a>
 
 
             <a  href="" target="">
-                <img class="img_menu" width='97' height="97 " src="../../static/media_files/png/nav/call-centr.png" alt="call" title="Колл-центр" />
+                <img class="img_menu" width='97' height="97 " src="{{ url_for('static', filename='media_files/png/nav/call-centr.png') }}" alt="call" title="Колл-центр" />
             </a>
 
 
@@ -64,7 +64,7 @@
             </a>
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-rosreestr-PKPVD-256.png" width="86" height="86">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-rosreestr-PKPVD-256.png') }}" width="86" height="86">
                 <br>
                 <span class="hidden" >ПК ПВД</span>
                 <br>
@@ -73,7 +73,7 @@
 
 
             <a class="content__link" href="">
-                <img id="img_links" src="../../static/media_files/png/ico-mfcbrown-256.png" width="86" height="86" alt="">
+                <img id="img_links" src="{{ url_for('static', filename='media_files/png/ico-mfcbrown-256.png') }}" width="86" height="86" alt="">
                 <br>
                 <span class="hidden">Портал МФЦ</span>
                 <br>

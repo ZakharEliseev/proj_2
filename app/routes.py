@@ -257,7 +257,7 @@ def compress_pdf(input_file, output_file, resolution):
 
     out_images = []
     for i, image in tqdm(
-        enumerate(images), total=len(images), desc="Compressing images"
+            enumerate(images), total=len(images), desc="Compressing images"
     ):
         # Уменьшаем разрешение изображения
         reduced_image = image.resize(
@@ -322,15 +322,25 @@ def compressed_files_pdf():
 @app.route("/phone_book", methods=["GET", "POST"])
 @login_required
 def phone_book():
+    count_contacts = len(PhoneBook.query.all())
     search_form = SearchPhoneBookForm()
+    page = request.args.get('page')
+    if page and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
     if search_form.validate_on_submit():
         search_value = search_form.search_field.data
         contacts = PhoneBook.query.filter((PhoneBook.fio.ilike(f'%{search_value}%') |
-                                           PhoneBook.organization.ilike(f'%{search_value}%'))).all()
+                                           PhoneBook.organization.ilike(f'%{search_value}%')))
     else:
-        contacts = PhoneBook.query.all()
-    count = len(contacts)
-    return render_template('phone_book.html', contacts=contacts, count=count, search_form=search_form)
+        contacts = PhoneBook.query
+
+    pages = contacts.paginate(page=page, per_page=10)
+    count = pages.total
+    return render_template('phone_book.html', contacts=contacts, count=count, search_form=search_form,
+                           pages=pages, count_contacts=count_contacts)
 
 
 @app.route("/phone_book/add", methods=["GET", "POST"])
@@ -359,8 +369,7 @@ def phone_book_delete(id):
     return redirect(url_for('phone_book'))
 
 
-
-@app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
+@app.route('/phone_book/edit/<int:id>', methods=["GET", "POST"])
 def phone_book_edit(id):
     contact = PhoneBook.query.get(id)
     form = PhoneBookForm()
@@ -381,6 +390,8 @@ def phone_book_edit(id):
 
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
+
+
 # @app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
 # def phone_book_edit(id):
 #     contact = PhoneBook.query.get(id)
