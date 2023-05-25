@@ -59,7 +59,7 @@ class RegistrationForm(FlaskForm):
 
 class EditProfile(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()])
-    phone_number = StringField("Номер телефона", validators=[Length(min=1, max=13)])
+    phone_number = StringField("Номер телефона", validators=[DataRequired()])
     position = StringField("Должность", validators=[DataRequired()])
     submit = SubmitField("Сохранить")
 
