@@ -1,6 +1,8 @@
 from imports import *
 
 
+# Декоратор для измерения времени работы функции
+
 def calculate_time(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
@@ -9,6 +11,7 @@ def calculate_time(func):
         end_time = time.time()
         print(f"Время выполнения функции '{func.__name__}': {end_time - start_time:.5f} секунд")
         return result
+
     return wrapper
 
 
@@ -41,7 +44,7 @@ def get_data_arm_3_by_bs4(url3):
     try:
         # driver.execute_script(f'window.open("{url3}");')
         driver.get(url3)
-        elem = driver.find_element(By.ID,'DEVICE')
+        elem = driver.find_element(By.ID, 'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
         wait = WebDriverWait(driver, 60)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')))
@@ -60,7 +63,7 @@ def get_data_arm_4_by_bs4(url4) -> str:
     driver = webdriver.Firefox(options=options)
     try:
         driver.get(url4)
-        elem = driver.find_element(By.ID,'DEVICE')
+        elem = driver.find_element(By.ID, 'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
         wait = WebDriverWait(driver, 60)
         wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')))
@@ -78,7 +81,7 @@ def get_data_arm_5_by_bs4(url5):
     driver = webdriver.Firefox(options=options)
     try:
         driver.get(url5)
-        elem = driver.find_element(By.ID,'DEVICE')
+        elem = driver.find_element(By.ID, 'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
         wait = WebDriverWait(driver, 60)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')))
@@ -96,7 +99,7 @@ def get_data_arm_6_by_bs4(url6):
     driver = webdriver.Firefox(options=options)
     try:
         driver.get(url6)
-        elem = driver.find_element(By.ID,'DEVICE')
+        elem = driver.find_element(By.ID, 'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
         wait = WebDriverWait(driver, 60)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')))
@@ -114,7 +117,7 @@ def get_data_arm_adm_by_bs4(url7):
     driver = webdriver.Firefox(options=options)
     try:
         driver.get(url7)
-        elem = driver.find_element(By.ID,'DEVICE')
+        elem = driver.find_element(By.ID, 'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
         wait = WebDriverWait(driver, 60)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')))
@@ -132,7 +135,7 @@ def get_data_arm_it_by_bs4(url8):
     driver = webdriver.Firefox(options=options)
     try:
         driver.get(url8)
-        elem = driver.find_element(By.ID,'DEVICE')
+        elem = driver.find_element(By.ID, 'DEVICE')
         driver.execute_script('arguments[0].click();', elem)
         wait = WebDriverWait(driver, 60)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'div[style="height: 20px; line-height: 20px;"]')))
@@ -190,6 +193,7 @@ def main():
     #           f'Окно6 = {arm6}, Админы = {arm7}, ИТ = {arm8}, Бэк1 = {arm9} Бэк2 = {arm10}')
     pp.pp(arm10)
     pp.pp(arm9)
+
 
 if __name__ == '__main__':
     main()

@@ -7,18 +7,12 @@ class GetDataByBrowserSession:
 
     def __init__(self):
         options = webdriver.FirefoxOptions()
-        # options.add_argument('-headless')
+        options.add_argument('-headless')  # Запуск в фоновом режиме
         self.driver = webdriver.Firefox(options=options)
 
-    def open_new_tab(self, url):
-        self.driver.execute_script(f'window.open("{url}");')
 
     def close(self):
         self.driver.quit()
-
-    def close_current_tab(self):
-        self.driver.close()
-        self.driver.switch_to.window(self.driver.window_handles[-1])
 
 
     def find_element_with_digits(self, data):

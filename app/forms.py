@@ -107,7 +107,7 @@ class UploadFormPDF(FlaskForm):
     resolution = IntegerField(
         "DPI для сжатия как при сканировании, например 150.",
         default=150,
-        validators=[DataRequired(), NumberRange(min=100, max=300)],
+        validators=[DataRequired(), NumberRange(min=10, max=300)],
     )
     submit = SubmitField("Загрузить для сжатия")
 

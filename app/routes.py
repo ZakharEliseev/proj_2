@@ -261,7 +261,7 @@ def compress_pdf(input_file, output_file, resolution):
     ):
         # Уменьшаем разрешение изображения
         reduced_image = image.resize(
-            (int(image.width * resolution / 72), int(image.height * resolution / 72))
+            (int(image.width * resolution / 100), int(image.height * resolution / 100))
         )
         out_images.append(reduced_image)
 
