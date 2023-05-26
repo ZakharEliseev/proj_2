@@ -5,14 +5,14 @@
 {% block head %}
  <meta charset="UTF-8">
     <title>Загрузка файлов</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
-        <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- хз -->
-    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'><!-- хз -->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- стили общие-->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- стили кнопок-->
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/uploads.css') }}"> <!-- стили кнопок-->
-    <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"> <!-- Стили bootstrap  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}"> <!-- Стили данной страницы  -->
+        <link href="{{ url_for('static', filename='css/all.min.css')}}" rel="stylesheet" > <!-- Стили bootstrap  -->
+    <link rel='stylesheet' href='{{ url_for('static', filename='css/font-awesome.min.css')}}'> <!-- Стили bootstrap  -->
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/main.css') }}"> <!-- Cтили общие-->
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/btn.css') }}"> <!-- Cтили кнопок-->
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/uploads.css') }}"> <!-- Cтили данной страницы-->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='media_files/ico/favicon.ico') }}" type="image/x-icon"> <!-- Фавиконка -->
 {% endblock %}
 {% block body %}
 
