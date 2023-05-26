@@ -22,3 +22,5 @@
 #### используйте команду на Windows: `set path=%path%;C:\path\to\poppler-0.68.0\bin`
 #### на Linux или MacOS: `export PATH=$PATH:/path/to/poppler-0.68.0/bin` 
 #### 3. Запустите приложение с помощью команды `flask run`.
+
+#### Приложение запустится по адресу  http://127.0.0.1:5000 в режиме отладки.

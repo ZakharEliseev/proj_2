@@ -16,6 +16,7 @@ def calculate_time(func):
 
 
 def get_data_arm_1(url1) -> list:
+
     options = webdriver.FirefoxOptions()
     options.add_argument('-headless')
     driver = webdriver.Firefox(options=options)
@@ -187,12 +188,12 @@ def main():
     # arm6 = get_data_arm_6_by_bs4(url6)
     # arm7 = get_data_arm_6_by_bs4(url7)
     # arm8 = get_data_arm_6_by_bs4(url8)
-    arm9 = get_data_bak_1(bak1)
-    arm10 = find_element_with_digits(get_data_bak_2(bak2))
+    arm9 = find_element_with_digits(get_data_arm_1(url1))
+    arm10 = find_element_with_digits(get_data_arm_2(url2))
     # pp.pprint(f'Окно1 = {arm1}, Окно2 = {arm2}, Окно3 = {arm3}, Окно4 = {arm4}, Окно5 = {arm5}, '
     #           f'Окно6 = {arm6}, Админы = {arm7}, ИТ = {arm8}, Бэк1 = {arm9} Бэк2 = {arm10}')
-    pp.pp(arm10)
     pp.pp(arm9)
+    pp.pp(arm10)
 
 
 if __name__ == '__main__':
