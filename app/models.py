@@ -13,9 +13,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     date_of_birth = db.Column(db.String(140))
-    last_seen = db.Column(
-        db.DateTime, server_default=func.utcnow(), default=datetime.utcnow
-    )
+    last_seen = db.Column(db.DateTime, server_default=func.utcnow(), default=datetime.utcnow)
     phone_number = db.Column(db.String(128), index=True)
     position = db.Column(db.String(128), index=True)
     passwords = db.relationship("UserPasswords", backref="user_pswd", lazy="dynamic")
@@ -59,15 +57,19 @@ class Toner(db.Model):
 
 class PhoneBook(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    fio = db.Column(db.String(120), index=True, nullable=False)
-    position = db.Column(db.String(120), index=True, default='Не заполнено')
-    phone_number = db.Column(db.String(20), index=True, nullable=False, unique=True)
-    organization = db.Column(db.String(120), index=True, default='Не заполнено')
+    fio = db.Column(db.String(30), index=True, default='Не заполнено')
+    position = db.Column(db.String(30), index=True, default='Не заполнено')
+    phone_number = db.Column(db.String(30), index=True, default='Не заполнено')
+    short_number = db.Column(db.String(30), index=True, default='Не заполнено')
+    personal_email = db.Column(db.String(30), index=True, default='Не заполнено')
+    organization = db.Column(db.String(30), index=True, default='Не заполнено')
 
-    def __init__(self, fio, phone_number, position, organization):
-        self.fio = fio
+    def __init__(self, fio, phone_number, position, short_number, personal_email, organization):
+        self.fio = fio if fio else 'Не заполнено'
         self.position = position if position else 'Не заполнено'
-        self.phone_number = phone_number
+        self.phone_number = phone_number if phone_number else 'Не заполнено'
+        self.short_number = short_number if short_number else 'Не заполнено'
+        self.personal_email = personal_email if personal_email else 'Не заполнено'
         self.organization = organization if organization else 'Не заполнено'
 
     def __repr__(self):
@@ -77,4 +79,3 @@ class PhoneBook(db.Model):
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-

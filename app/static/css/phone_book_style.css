@@ -77,9 +77,22 @@ a {
 
 .container {
     margin-top: 50px;
-    width: 1200px;
+    width: 1600px;
 }
 
 .text-muted {
     color: #000000 !important;
+}
+
+@media (min-width: 1400px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: 1399px;
+    }
+}
+
+.logo{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 300px;
 }

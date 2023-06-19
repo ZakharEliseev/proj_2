@@ -168,3 +168,7 @@ jpg/
 *.db
 app_backup.db
 migrations/
+csv/
+*.csv
+nginx-1.25.0/
+mfc.rar

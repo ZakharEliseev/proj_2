@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block body %}
-    <section class="vh-100" style="background-color: #ce9a68ab;">
+    <section class="vh-100">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -47,6 +47,20 @@
                             <span style="color: red;">[{{ error }}]</span>
                             {% endfor %}
                         </div>
+                        <div class="form-outline mb-4">
+                            {{ form.short_number(type="position", id="typeEmailX-2", class="form-control form-control-lg") }}<br>
+                            {{ form.short_number.label(class="form-label", for="typeEmailX-2")}}
+                            {% for error in form.short_number.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                         </div>
+                        <div class="form-outline mb-4">
+                            {{ form.personal_email(type="position", id="typeEmailX-2", class="form-control form-control-lg") }}<br>
+                            {{ form.personal_email.label(class="form-label", for="typeEmailX-2")}}
+                            {% for error in form.personal_email.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                            {% endfor %}
+                         </div>
                         <div class="form-outline mb-4">
                             {{ form.organization(type="position", id="typeEmailX-2", class="form-control form-control-lg") }}<br>
                             {{ form.organization.label(class="form-label", for="typeEmailX-2")}}

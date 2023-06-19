@@ -27,3 +27,10 @@
     margin-bottom: 3px!important;
 }
 
+.link_file{
+  text-decoration: none!important;
+  position: relative;
+  bottom: 30px;
+}
+
+

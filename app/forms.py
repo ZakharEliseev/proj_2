@@ -117,9 +117,16 @@ class PhoneBookForm(FlaskForm):
     position = StringField('Должность')
     phone_number = StringField('Телефон', validators=[DataRequired()])
     organization = StringField('Организация')
+    short_number = StringField('Короткий телефон')
+    personal_email = StringField('Электронная почта')
     submit = SubmitField('Сохранить')
 
 
 class SearchPhoneBookForm(FlaskForm):
     search_field = StringField('Поиск')
     submit = SubmitField('Найти')
+
+
+class UploadFormXLSX(FlaskForm):
+    file = FileField("File", validators=[DataRequired()])
+    submit = SubmitField("Загрузить для добавления контактов")

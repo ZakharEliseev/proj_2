@@ -85,3 +85,37 @@ body {
   top: -1px;
 }
 
+.form-control-lg {
+    font-size: 1em;
+}
+
+.mb-4 {
+    margin-bottom: 0.32em!important;
+}
+/* Стили для сообщения об успешной операции */
+.flash-success {
+  background-color: green;
+  color: white;
+  float: right;
+}
+
+/* Стили для сообщения об ошибке */
+.flash-error {
+  background-color: red;
+  color: white;
+  float: right;
+}
+
+/* Стили для информационного сообщения */
+.flash-info {
+  background-color: blue;
+  color: white;
+  float: right;
+}
+
+/* Стили для предупреждающего сообщения */
+.flash-warning {
+  background-color: yellow;
+  color: black;
+  float: right;
+}

@@ -1,4 +1,5 @@
 import pprint
+from functools import lru_cache
 
 from imports import *
 
@@ -10,10 +11,8 @@ class GetDataByBrowserSession:
         options.add_argument('-headless')  # Запуск в фоновом режиме
         self.driver = webdriver.Firefox(options=options)
 
-
     def close(self):
         self.driver.quit()
-
 
     def find_element_with_digits(self, data):
         for element in data:
@@ -22,10 +21,10 @@ class GetDataByBrowserSession:
                     return element
         return 'МФУ недоступно'
 
-
     def is_printer_available(self, printer_address):
         return ping(printer_address) is not None
 
+    @lru_cache(maxsize=None)
     def get_data_arm_1(self, url1):
         self.driver.get(url1)
         elems = self.driver.find_elements(By.CLASS_NAME, 'style363')
@@ -120,6 +119,7 @@ def calculate_time(func):
         end_time = time.time()
         print(f"Время выполнения функции '{func.__name__}': {end_time - start_time:.5f} секунд")
         return result
+
     return wrapper
 
 
@@ -142,10 +142,10 @@ def main():
     else:
         arm1 = None
 
-    if session.is_printer_available(address_arm_2):
-        arm2 = session.find_element_with_digits(session.get_data_arm_2(url2))
-    else:
-        arm2 = None
+    # if session.is_printer_available(address_arm_2):
+    #     arm2 = session.find_element_with_digits(session.get_data_arm_2(url2))
+    # else:
+    #     arm2 = None
 
     # if session.is_printer_available(address_arm_3):
     #     arm3 = session.get_data_arm_3_by_bs4(url3)
@@ -178,7 +178,7 @@ def main():
     #     arm_it_8 = None
 
     session.close()
-    pp.pp(f'Окно1 = {arm1}, Окно2 = {arm2}')
+    pp.pp(f'Окно1 = {arm1}')
     # pp.pprint(f'Окно1 = {arm1}, Окно2 = {arm2}, Окно3 = {arm3}, Окно4 = {arm4}, Окно5 = {arm5}, '
     #            f'Окно6 = {arm6}, Админы = {arm_adm_7}, ИТ = {arm_it_8}, Бэк1 = {arm_bak_1_1} Бэк2 = {arm_bak_2_2}')
 

@@ -43,13 +43,21 @@
   </div>
 </div>
 {% with messages = get_flashed_messages() %}
-{% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
+  {% if messages %}
+    <ul class="flash-messages">
+      {% for message in messages %}
+        {% if message.startswith('success') %}
+          <li class="flash-success">{{ message[7:] }}</li>
+        {% elif message.startswith('error') %}
+          <li class="flash-error">{{ message[5:] }}</li>
+        {% elif message.startswith('info') %}
+          <li class="flash-info">{{ message[4:] }}</li>
+        {% elif message.startswith('warning') %}
+          <li class="flash-warning">{{ message[8:] }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endwith %}
 <body>
 {% block body %}

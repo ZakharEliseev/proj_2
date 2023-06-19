@@ -1,4 +1,5 @@
-from sqlalchemy import or_
+import pandas as pd
+from sqlalchemy import func
 
 from app import app, db
 from tqdm import tqdm
@@ -13,7 +14,7 @@ from flask import (
     flash,
     send_file,
     session,
-    g,
+    g, current_app, send_from_directory,
 )
 from app.forms import (
     LoginForm,
@@ -22,7 +23,8 @@ from app.forms import (
     EditProfilePasswd,
     UploadFormTIFF,
     UploadFormPDF,
-    PhoneBookForm, SearchPhoneBookForm
+    PhoneBookForm,
+    SearchPhoneBookForm, UploadFormXLSX
 )
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, UserPasswords, PhoneBook
@@ -30,8 +32,10 @@ from flask import request
 from urllib.parse import urlsplit
 from io import BytesIO
 from PIL import Image
+from werkzeug.utils import secure_filename
 
 app.config["UPLOAD_FOLDER"] = "uploads"
+app.config["DOWNLOAD_FOLDER"] = 'csv'
 list_endpoints = [
     "main_index",
     "index",
@@ -57,6 +61,8 @@ list_endpoints = [
     "phone_book_add",
     "phone_book_delete",
     "phone_book_edit",
+    "phone_book_add_on_file",
+    "download_file",
 ]
 for i in list_endpoints:
     if i in app.view_functions:
@@ -152,9 +158,18 @@ def register():
             password_delo="задайте пароль!",
             user_pswd=user,
         )
+        personal_phone_number = PhoneBook(
+            fio=form.username.data,
+            position=form.position.data,
+            phone_number=form.phone_number.data,
+            personal_email=form.email.data,
+            organization='АУ МФЦ Югры в Белоярском районе',
+            short_number='Не задано',
+        )
         with app.app_context():
             db.session.add(user)
             db.session.add(new_passwords)
+            db.session.add(personal_phone_number)
             db.session.commit()
         flash("Поздравляю! Вы зарегестрированы!")
         return redirect(url_for("login"))
@@ -177,6 +192,11 @@ def edit_profile():
         current_user.phone_number = form.phone_number.data
         current_user.position = form.position.data
         db.session.commit()
+        contact = PhoneBook.query.filter_by(fio=current_user.username).first()
+        if contact:
+            contact.personal_email = form.email.data
+            contact.phone_number = form.phone_number.data
+            db.session.commit()
         flash("Изменения сохранены")
         return redirect(url_for("user", username=current_user.username))
     elif request.method == "GET":
@@ -220,7 +240,7 @@ def resize_tiff(image_file, percent):
     with Image.open(image_file) as img:
         width, height = img.size
         # Делим ширину полученную из формы на 100
-        new_width = int(width * (percent / 100))
+        new_width: int = int(width * (percent / 100))
         # Делим высоту полученную из формы на 100
         new_height = int(height * (percent / 100))
         resized_img = img.resize((new_width, new_height))
@@ -329,15 +349,18 @@ def phone_book():
         page = int(page)
     else:
         page = 1
-
     if search_form.validate_on_submit():
-        search_value = search_form.search_field.data
-        contacts = PhoneBook.query.filter((PhoneBook.fio.ilike(f'%{search_value}%') |
-                                           PhoneBook.organization.ilike(f'%{search_value}%')))
+        search_value = search_form.search_field.data.replace(" ", "")
+        contacts = PhoneBook.query.filter(
+            (PhoneBook.fio.ilike(f'%{search_value}%')) |
+            (PhoneBook.fio.like(f'%{search_value.capitalize()}%')) |
+            (PhoneBook.organization.ilike(f'%{search_value}%')) |
+            (PhoneBook.organization.like(f'%{search_value.upper()}%'))
+        )
     else:
         contacts = PhoneBook.query
 
-    pages = contacts.paginate(page=page, per_page=10)
+    pages = contacts.paginate(page=page, per_page=9)
     count = pages.total
     return render_template('phone_book.html', contacts=contacts, count=count, search_form=search_form,
                            pages=pages, count_contacts=count_contacts)
@@ -352,12 +375,61 @@ def phone_book_add():
             fio=form.fio.data,
             position=form.position.data,
             phone_number=form.phone_number.data,
+            short_number=form.short_number.data,
+            personal_email=form.personal_email.data,
             organization=form.organization.data,
         )
         db.session.add(contact)
         db.session.commit()
         return redirect(url_for('phone_book'))
     return render_template("phone_book_add.html", form=form)
+
+
+@app.route("/phone_book/add_on_file", methods=["GET", "POST"])
+@login_required
+def phone_book_add_on_file():
+    form = UploadFormXLSX()
+    contacts = []
+    if request.method == 'POST' and form.validate_on_submit():
+        file = request.files.get('file')
+        if file:
+            filename = secure_filename(file.filename)
+            filepath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+            file.save(filepath)
+            try:
+                data = pd.read_excel(io=filepath, engine='openpyxl',  names=["A", "B", "C", "D", "E", "F"], header=1)
+                for index, row in data.iterrows():
+                    fio = row["A"] if not pd.isnull(row["A"]) else "Не указано"
+                    position = row["B"] if not pd.isnull(row["C"]) else "Не указано"
+                    phone_number = row["C"] if not pd.isnull(row["B"]) else "+7(000) 000-00-00"
+                    short_number = row["D"] if not pd.isnull(row["D"]) else "Не указано"
+                    personal_email = row["E"] if not pd.isnull(row["E"]) else "000000@email.ru"
+                    organization = row["F"] if not pd.isnull(row["F"]) else "Не указано"
+
+                    contact = PhoneBook(
+                        fio=fio,
+                        position=position,
+                        phone_number=phone_number,
+                        short_number=short_number,
+                        personal_email=personal_email,
+                        organization=organization
+                    )
+                    db.session.add(contact)
+                db.session.commit()
+                flash('Контакты успешно добавлены.')
+                os.remove(filepath)
+            except Exception as e:
+                flash(f"Ошибка при обработке файла: {str(e)}")
+                os.remove(filepath)
+        return redirect(url_for('phone_book'))
+    return render_template('phone_book_add_on_file.html', form=form)
+
+
+@app.route("/uploads/<string:name>")
+def download_file(name):
+    name = 'new_example.xlsx'
+    location = os.path.join(app.config["DOWNLOAD_FOLDER"], name)
+    return send_file(path_or_file=location, mimetype='application/xlsx', as_attachment=True)
 
 
 @app.route('/phone_book/delete/<int:id>', methods=["GET", "POST"])
@@ -370,34 +442,32 @@ def phone_book_delete(id):
 
 
 @app.route('/phone_book/edit/<int:id>', methods=["GET", "POST"])
-def phone_book_edit(id):
+def phone_book_edit(id: object) -> object:
     contact = PhoneBook.query.get(id)
     form = PhoneBookForm()
     if form.validate_on_submit():
         contact.fio = form.fio.data
         contact.position = form.position.data
         contact.phone_number = form.phone_number.data
+        contact.short_number = form.short_number.data
+        contact.personal_email = form.personal_email.data
         contact.organization = form.organization.data
         db.session.commit()
+        user = User.query.filter_by(username=contact.fio).first()
+        if user:
+            user.phone_number = form.phone_number.data
+            user.email = form.personal_email.data
+            db.session.commit()
         return redirect(url_for('phone_book'))
     elif request.method == 'GET':
         form.fio.data = contact.fio
         form.position.data = contact.position
         form.phone_number.data = contact.phone_number
+        form.short_number.data = contact.short_number
+        form.personal_email.data = contact.personal_email
         form.organization.data = contact.organization
     return render_template('phone_book_edit.html', form=form)
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=True)
-
-
-# @app.route('/phone_book/edit/<int:id>',  methods=["GET", "POST"])
-# def phone_book_edit(id):
-#     contact = PhoneBook.query.get(id)
-#     form = PhoneBookForm(obj=contact)
-#     if form.validate_on_submit():
-#         form.populate_obj(contact)
-#         db.session.commit()
-#         return redirect(url_for('phone_book'))
-#     return render_template('phone_book_edit.html', form=form)
+    app.run(host='0.0.0.0', port=1234, debug=True, use_reloader=True)
